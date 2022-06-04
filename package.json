@@ -1,0 +1,23 @@
+{
+  "name": "syntax-tree-visualization",
+  "version": "1.0.0",
+  "description": "Web application for visualizing abstract syntax tree and syntax array of the code",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InnoSWP/syntax-tree-visualization.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InnoSWP/syntax-tree-visualization/issues"
+  },
+  "homepage": "https://github.com/InnoSWP/syntax-tree-visualization#readme",
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
