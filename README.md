@@ -60,7 +60,7 @@ yarn
 yarn build
 ```
 
-**Start server** on http://localhost:8080/
+**Start server without building it** on http://localhost:8080/
 
 ```shell
 yarn start
