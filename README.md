@@ -7,5 +7,5 @@ Web application for visualizing abstract syntax tree and syntax array of the cod
 * npm init -y
 * yarn add -D typescript
 * npx tsc --init
-* yarn build
-</br>Now you have your .ts files are compiled into .js files
+* yarn start
+</br>Server started
