@@ -1,32 +1,68 @@
 # Syntax tree visualizer
 
+## About
+
 Web application for visualizing abstract syntax tree and syntax array of the code
 
-## How to build
-First, install npm
-Mac:
+## Development
+
+### Local setup
+
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes.
+
+#### Requirements
+
+For running the project you need the following requirements:
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Git](https://git-scm.com/downloads)
+
+On macOS using Homebrew:
+
 ```shell
-brew install node
+brew install git node
+npm install yarn
 ```
-Ubuntu:
+On Arch Linux:
+
 ```shell
-sudo apt install nodejs
-```
-Arch:
-```shell
-pacman -Suy nodejs npm
+pacman -Suy nodejs npm git
+npm install yarn
 ```
 
-Windows sucks
+On Ubuntu:
 
-And the yarn
 ```shell
-npm install --global yarn
+sudo apt install nodejs git
+npm install yarn
 ```
 
-Then start the server
+On Windows:
 ```shell
-yarn install 
-yarn start
+????
+```
+
+### Building and running
+
+**Clone repo**
+```shell
+git clone https://github.com/InnoSWP/syntax-tree-visualization
+```
+**Install dependencies**
+
+```shell
+yarn
  ```
-</br>Server started
+**Build project**
+
+```shell
+yarn build
+```
+
+**Start server** on http://localhost:8080/
+
+```shell
+yarn start
+```
+
