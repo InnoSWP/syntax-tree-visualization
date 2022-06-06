@@ -3,9 +3,30 @@
 Web application for visualizing abstract syntax tree and syntax array of the code
 
 ## How to build
-* install npm
-* npm init -y
-* yarn add -D typescript
-* npx tsc --init
-* yarn start
+First, install npm
+Mac:
+```shell
+brew install node
+```
+Ubuntu:
+```shell
+sudo apt install nodejs
+```
+Arch:
+```shell
+pacman -Suy nodejs npm
+```
+
+Windows sucks
+
+And the yarn
+```shell
+npm install --global yarn
+```
+
+Then start the server
+```shell
+yarn install 
+yarn start
+ ```
 </br>Server started
