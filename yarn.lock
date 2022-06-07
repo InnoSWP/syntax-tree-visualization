@@ -559,11 +559,6 @@
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
-"fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
-
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
@@ -920,6 +915,11 @@
   "integrity" "sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
   "version" "2.0.0"
+
+"nan@^2.12.1":
+  "integrity" "sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA=="
+  "resolved" "https://registry.npmjs.org/nan/-/nan-2.16.0.tgz"
+  "version" "2.16.0"
 
 "negotiator@0.6.3":
   "integrity" "sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg=="
@@ -1300,6 +1300,13 @@
   "integrity" "sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A=="
   "resolved" "https://registry.npmjs.org/tree-kill/-/tree-kill-1.2.2.tgz"
   "version" "1.2.2"
+
+"tree-sitter-javascript@^0.19.0":
+  "integrity" "sha512-SNykDdNgmlJZhX02ZIu0TQF9P7t847jV7769SxA9XrZ2QXjofQsVTMEi9+LpXZKsI0UoFYI25FnZm3fFm0z2yw=="
+  "resolved" "https://registry.npmjs.org/tree-sitter-javascript/-/tree-sitter-javascript-0.19.0.tgz"
+  "version" "0.19.0"
+  dependencies:
+    "nan" "^2.12.1"
 
 "ts-node-dev@^2.0.0":
   "integrity" "sha512-ywMrhCfH6M75yftYvrvNarLEY+SUXtUvU8/0Z6llrHQVBx12GiFk5sStF8UdfE/yfzk9IAq7O5EEbTQsxlBI8w=="
