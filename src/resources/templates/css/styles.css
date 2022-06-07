@@ -3,8 +3,29 @@
     margin: 0;
 }
 
-.head{
+header{
     height: 73px;
     width: 100%;
     background: #438440;
+
 }
+.logo{
+    margin-left: 41px;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-icons{
+    margin-right: 20px ;
+}
+
+.header-icons li{
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+
