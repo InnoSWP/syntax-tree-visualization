@@ -10,7 +10,7 @@ app.get('/', (req, res, next) => {
     res.writeHead(200, {
         'Content-type': 'text/html;'
     })
-    res.write(fs.readFileSync(path.join(__dirname, '..', 'resources', 'templates', 'index.html')))
+    res.write(fs.readFileSync(path.join(__dirname, '..', 'resources', 'templates', 'texteditor.html')))
     res.end()
     console.log('Get request on /')
 })
