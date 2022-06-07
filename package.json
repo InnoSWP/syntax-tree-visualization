@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/InnoSWP/syntax-tree-visualization#readme",
   "devDependencies": {
+    "@types/ace": "^0.0.48",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.40",
     "nodemon": "^2.0.16",
