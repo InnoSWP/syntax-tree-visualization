@@ -14,7 +14,8 @@ app.get('/', (req, res, next) => {
     res.end()
     console.log('Get request on /')
 })
-app.use(express.static('src'))
+
+app.use(express.static('src/resources/static'))
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)
