@@ -4,7 +4,7 @@ Collection of useful links to external resources and notes
 
 ## Workflow
 
-- [Task Management Workflow](Task_Management_Workflow.md)
+- [Task Management Workflow](Task_management_workflow.md)
 
 
 ## Front end
