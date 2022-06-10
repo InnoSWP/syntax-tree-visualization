@@ -48,6 +48,8 @@ On Windows:
 **Clone repo**
 ```shell
 git clone https://github.com/InnoSWP/syntax-tree-visualization
+git submodule init
+git submodule update
 ```
 **Install dependencies**
 
