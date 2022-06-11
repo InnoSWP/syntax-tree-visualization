@@ -1,3 +1,3 @@
-class Tree {
+export class Tree {
 
 }
