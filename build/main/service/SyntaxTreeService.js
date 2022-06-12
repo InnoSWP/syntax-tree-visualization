@@ -7,58 +7,58 @@ exports.SyntaxTreeService = void 0;
 const tree_sitter_1 = __importDefault(require("tree-sitter"));
 // @ts-ignore
 const tree_sitter_javascript_1 = __importDefault(require("tree-sitter-javascript"));
-let parser = new tree_sitter_1.default();
-parser.setLanguage(tree_sitter_javascript_1.default);
-const sourceCode = 'let x = 1; console.log(x);';
-const tree = parser.parse(sourceCode);
-var ans;
-let node = tree.rootNode;
-// while (node != null) {
-//     for()
+// function bfs(node: Parser.SyntaxNode | null) {
+//     let queue = [node];
+//     let arr = [[node]];
+//     while (queue.length != 0) {
+//         let cur = queue.shift();
+//         if (cur == null || cur.isMissing()) {
+//             continue;
+//         }
+//
+//         for (let i = 0; i < cur.childCount; ++i) {
+//             queue.push(cur.child(i));
+//         }
+//     }
+//     return arr;
 // }
-// @ts-ignore
-// tree.rootNode.child(0).child(0).;
-// @ts-ignore
-// console.log(tree.rootNode);
-dfs(node);
-function dfs(node) {
-    if (node == null || node.isMissing())
-        return;
-    console.log(node);
-    for (let i = 0; i < node.childCount; ++i) {
-        dfs(node.child(i));
-    }
-}
-function bfs(node) {
-    let queue = [node];
-    while (queue.length != 0) {
-        let cur = queue.shift();
-        if (cur == null || cur.isMissing()) {
-            continue;
-        }
-        console.log(cur);
-        for (let i = 0; i < cur.childCount; ++i) {
-            queue.push(cur.child(i));
-        }
-    }
-}
-// (program
-//   (lexical_declaration
-//     (variable_declarator (identifier) (number)))
-//   (expression_statement
-//     (call_expression
-//       (member_expression (identifier) (property_identifier))
-//       (arguments (identifier)))))
-// @ts-ignore
-// const callExpression = tree.rootNode.child(1).firstChild;
-// console.log(callExpression);
-// { type: 'call_expression',
-//   startPosition: {row: 0, column: 16},
-//   endPosition: {row: 0, column: 30},
-//   startIndex: 0,
-//   endIndex: 30 }
 class SyntaxTreeService {
     getTreeFrom(code) {
+        let parser = new tree_sitter_1.default();
+        parser.setLanguage(tree_sitter_javascript_1.default);
+        const sourceCode = code; //'let x = 1; console.log(x);';
+        const tree = parser.parse(sourceCode);
+        var ans = "";
+        let node = tree.rootNode;
+        let arr = [];
+        let ind = 0;
+        dfs(node, arr);
+        function dfs(node, arr, depth = 0) {
+            if (node == null || node.isMissing())
+                return;
+            // console.log(node.text);
+            ans += node.text;
+            arr.push([]);
+            let i = 0, prevCount = 0;
+            if (ind > 0)
+                prevCount = arr[ind - 1].length;
+            while (i < Math.max(depth + 1, prevCount)) {
+                if (i < prevCount)
+                    arr[ind].push(arr[ind - 1][i]);
+                else
+                    arr[ind][i] = 0;
+                if (depth == i)
+                    arr[ind][i]++;
+                ++i;
+            }
+            // console.log(arr[ind], depth);
+            ans += arr[ind];
+            for (let i = 0; i < node.childCount; ++i) {
+                ++ind;
+                dfs(node.child(i), arr, depth + 1);
+            }
+        }
+        return ans;
     }
 }
 exports.SyntaxTreeService = SyntaxTreeService;
