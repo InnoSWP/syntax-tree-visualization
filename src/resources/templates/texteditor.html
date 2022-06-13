@@ -10,7 +10,7 @@
             /*bottom: 0;*/
             /*left: 0;*/
             height: 500px;
-            width:350px;
+            width: 350px;
         }
     </style>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
@@ -19,12 +19,12 @@
 
 <header>
     <nav>
-        <div class = "container">
-            <a class = "logo"><img src="/img/logo.svg"></a>
+        <div class="container">
+            <a class="logo"><img src="/img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
                     <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"> </li>
+                    <li><img src="/img/help.svg"></li>
 
                 </ul>
             </div>
@@ -33,33 +33,90 @@
 </header>
 
 <div class="flexbox-container">
-<div class="editor-container">
-    <div id="editor"> function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
-        }
-    </div>
-</div>
-
-<div class="f1-container">
-    <button><img src="/img/fullscreen.svg"></button>
-    <div class="vis-container">
-    <div class = "tree-container">
-        for tree
-    </div>
-        <div class = "array-container">
-            for array
+    <div class="editor-container">
+        <div id="editor"> function foo(items) {
+            var x = "All this is syntax highlighted";
+            return x;
+            }
         </div>
     </div>
-</div>
+
+    <div class="f1-container">
+        <button><img src="/img/fullscreen.svg"></button>
+        <div class="vis-container">
+            <div class="tree-container" id="tree-cont">
+
+            </div>
+            <div class="array-container">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/javascript");
+
+</script>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+
+
+    const f = document.getElementById("tree-cont");
+
+    var svg = d3.select(f).append("svg")
+        .attr("width", 500).attr("height", 700)
+        .append("g").attr("transform", "translate(0,20)"); //высота и ширина поля на котором рисуем
+    // далее смещение на 0 и 20
+
+
+    var data = [{"child": "funDef(1)", "parent": ""},
+        {"child": "funDef(2)", "parent": "funDef(1)"},
+        {"child": "call sum2(1)", "parent": "funDef(1)"},
+        {"child": "call sum2(2)", "parent": "call sum2(1)"},
+        {"child": "bin op(-)", "parent": "call sum2(2)"},
+        {"child": "var x(1)", "parent": "bin op(-)"},
+        {"child": "var n(1)", "parent": "bin op(-)"},
+        {"child": "bin-op(+)", "parent": "funDef(2)"},
+        {"child": "var x(1)", "parent": "bin-op(+)"},
+        {"child": "var n(1)", "parent": "bin-op(+)"}
+    ]; // объявление массива
+
+    var dataStrucure = d3.stratify().id(function (d) {
+        return d.child;
+    })
+        .parentId(function (d) {
+            return d.parent;
+        })(data); //построение зависимой структуры
+    var treeStructure = d3.tree().size([500, 300]); //размер дерева в пикселях
+    var information = treeStructure(dataStrucure); //построение древовидной структуры
+
+    // console.log(information.descendants());
+    // console.log(information.links());
+
+    var circules = svg.append("g").selectAll("circle")
+        .data(information.descendants());
+    circules.enter().append("circle")
+        .attr("cx", function (d) {
+            return d.x;
+        })
+        .attr("cy", function (d) {
+            return d.y;
+        })
+        .attr("r", 6);
+
+    var connections = svg.append("g").selectAll("path")
+        .data(information.links());
+    connections.enter().append("path").attr("d", function (d) {
+        return "M" + d.source.x + "," + d.source.y + " C " + ""
+    })
 </script>
 </body>
 </html>
