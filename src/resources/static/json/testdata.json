@@ -1,0 +1,101 @@
+{
+"type": "program",
+"text": "let x = 1; console.log(x);",
+"children": [
+{
+"type": "lexical_declaration",
+"text": "let x = 1;",
+"children": [
+{
+"type": "let",
+"text": "let",
+"children": []
+},
+{
+"type": "variable_declarator",
+"text": "x = 1",
+"children": [
+{
+"type": "identifier",
+"text": "x",
+"children": []
+},
+{
+"type": "=",
+"text": "=",
+"children": []
+},
+{
+"type": "number",
+"text": "1",
+"children": []
+}
+]
+},
+{
+"type": ";",
+"text": ";",
+"children": []
+}
+]
+},
+{
+"type": "expression_statement",
+"text": "console.log(x);",
+"children": [
+{
+"type": "call_expression",
+"text": "console.log(x)",
+"children": [
+{
+"type": "member_expression",
+"text": "console.log",
+"children": [
+{
+"type": "identifier",
+"text": "console",
+"children": []
+},
+{
+"type": ".",
+"text": ".",
+"children": []
+},
+{
+"type": "property_identifier",
+"text": "log",
+"children": []
+}
+]
+},
+{
+"type": "arguments",
+"text": "(x)",
+"children": [
+{
+"type": "(",
+"text": "(",
+"children": []
+},
+{
+"type": "identifier",
+"text": "x",
+"children": []
+},
+{
+"type": ")",
+"text": ")",
+"children": []
+}
+]
+}
+]
+},
+{
+"type": ";",
+"text": ";",
+"children": []
+}
+]
+}
+]}
