@@ -1,70 +1,53 @@
-import Parser from "tree-sitter"
-// @ts-ignore
-import JavaScript from "tree-sitter-javascript"
-import {Tree} from 'main/model/Tree'
+import Parser from 'tree-sitter'
+//@ts-ignore
+import JavaScript from 'tree-sitter-javascript'
 
-// function bfs(node: Parser.SyntaxNode | null) {
-//     let queue = [node];
-//     let arr = [[node]];
-//     while (queue.length != 0) {
-//         let cur = queue.shift();
-//         if (cur == null || cur.isMissing()) {
-//             continue;
-//         }
-//
-//         for (let i = 0; i < cur.childCount; ++i) {
-//             queue.push(cur.child(i));
-//         }
-//     }
-//     return arr;
-// }
-
+let parser = new Parser()
+parser.setLanguage(JavaScript)
 
 export class SyntaxTreeService {
-    public getTreeFrom(code: string) {
-        let parser = new Parser()
-        parser.setLanguage(JavaScript)
+    #ind = 0;
 
-        const sourceCode = code//'let x = 1; console.log(x);';
-        const tree = parser.parse(sourceCode);
-        var ansTree = ""
-        var ansArray = ""
-        let node: Parser.SyntaxNode | null = tree.rootNode
+    getTreeAndArrayFrom(code: string) {
+        let tree = parser.parse(code);
+        let node = tree.rootNode
+        return this.#getTree(node)
+    }
 
+    #getTree(node: Parser.SyntaxNode) {
+        let tree = {}
+        let arr: any = [];
+        this.#ind = 0;
+        this.#dfsTree(node, arr, tree)
+        return {tree, arr};
+    }
 
-        let arr: number[][] = [];
-        let ind = 0;
-        dfs(node, arr);
+    #dfsTree(node: Parser.SyntaxNode, arr: any, tree: any, depth = 0) {
+        if (node == null || node.isMissing())
+            return;
+        tree.type = node.type;
+        tree.text = node.text;
+        tree.position = {start: node.startPosition, end: node.endPosition};
+        tree.children = [];
+        arr.push([]);
+        let i = 0, prevCount = 0;
+        if (this.#ind > 0) prevCount = arr[this.#ind - 1].length;
 
-        function dfs(node: Parser.SyntaxNode | null, arr: number[][],
-                     depth: number = 0) {
-            if (node == null || node.isMissing())
-                return;
-            // console.log(node.text);
-            ansTree += '\n' + node.text
-            arr.push([]);
-            let i = 0, prevCount = 0;
-            if (ind > 0) prevCount = arr[ind - 1].length;
-
-            while (i < Math.max(depth + 1, prevCount)) {
-                if (i < prevCount)
-                    arr[ind].push(arr[ind - 1][i]);
-                else
-                    arr[ind][i] = 0;
-                if (depth == i)
-                    arr[ind][i]++;
-                ++i;
-            }
-            // console.log(arr[ind], depth);
-            ansArray += '\n' + arr[ind]
-
-
-            for (let i = 0; i < node.childCount; ++i) {
-                ++ind;
-                dfs(node.child(i), arr, depth + 1);
-            }
+        while (i < Math.max(depth + 1, prevCount)) {
+            if (i < prevCount)
+                arr[this.#ind].push(arr[this.#ind - 1][i]);
+            else
+                arr[this.#ind][i] = 0;
+            if (depth == i)
+                arr[this.#ind][i]++;
+            ++i;
         }
 
-        return {ansTree, ansArray}
+        for (let i = 0; i < node.childCount; ++i) {
+            ++this.#ind;
+            tree.children.push({});
+            // @ts-ignore
+            this.#dfsTree(node.child(i), arr, tree.children[i], depth + 1);
+        }
     }
 }
