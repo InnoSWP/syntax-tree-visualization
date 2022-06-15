@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <title>ACE in Action</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" path1tent=
+            "width=device-width,
+        initial-scale=1.0"/>
     <style type="text/css" media="screen">
         #editor {
             /*position: absolute;*/
@@ -10,21 +14,23 @@
             /*bottom: 0;*/
             /*left: 0;*/
             height: 500px;
-            width:350px;
+            width: 350px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
 </head>
 <body>
 
 <header>
     <nav>
-        <div class = "container">
-            <a class = "logo"><img src="/img/logo.svg"></a>
+        <div class="container">
+            <a class="logo"><img src="/img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
                     <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"> </li>
+                    <li><img src="/img/help.svg"></li>
 
                 </ul>
             </div>
@@ -33,33 +39,140 @@
 </header>
 
 <div class="flexbox-container">
-<div class="editor-container">
-    <div id="editor"> function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
-        }
-    </div>
-</div>
-
-<div class="f1-container">
-    <button><img src="/img/fullscreen.svg"></button>
-    <div class="vis-container">
-    <div class = "tree-container">
-        for tree
-    </div>
-        <div class = "array-container">
-            for array
+    <div class="editor-container">
+        <div id="editor"> let x = 1;
+            console.log(x);
         </div>
     </div>
-</div>
+
+    <div class="f1-container">
+        <button><img src="/img/fullscreen.svg"></button>
+        <div class="vis-container">
+            <div class="tree-container" id="tree-cont">
+
+            </div>
+            <div class="array-container">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/javascript");
+
+</script>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+    const f = document.getElementById("tree-cont");
+    // Set the dimensions and margins of the diagram
+    var margin = {top: 40, right: 90, bottom: 50, left: 90},
+        w = 500 - margin.left - margin.right,
+        h = 500 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select(f).append('svg')
+        .attr('width', w + margin.left + margin.right)
+        .attr('height', h + margin.top + margin.bottom);
+
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var g = svg.append('g')
+        .attr('transform',
+            'translate(' + margin.left + ',' + margin.top + ')');
+
+    // declares a tree layout and assigns the size
+    var tree = d3.tree()
+        .size([w, h]);
+    d3.json("/json/testdata.json", function (data) {
+            // Assigns parent
+            var nodes = d3.hierarchy(data);
+
+            // Assigns the x and y position for the nodes
+            nodes = tree(nodes);
+            console.log(nodes);
+
+            // adds the links between the nodes
+            var link = g.selectAll(".link")
+                .data(nodes.descendants().slice(1))
+                .enter()
+                .append("path")
+                .attr("class", "link")
+                .attr("d", (d) => {
+                    return "M" + d.x + "," + d.y
+                        + "C" + d.x + "," + (d.y + d.parent.y) / 2
+                        + " " + d.parent.x + "," + (d.y + d.parent.y) / 2
+                        + " " + d.parent.x + "," + d.parent.y;
+                })
+                .attr('fill', 'none')
+                .attr('stroke', '#438440')
+                .attr('stroke-width', 1.5);
+
+            // adds each node as a group
+            var node = g.selectAll('.node')
+                .data(nodes.descendants())
+                .enter()
+                .append('g')
+                .attr('class', (d) => {
+                    return "node" +
+                        (d.children ? " node--internal" : " node--leaf");
+                })
+                .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+
+            // adds the circle to the node
+            node.append('circle')
+                .attr('r', 5)
+                .attr('fill', 'black');
+            //     node.append("rect")
+            //         .attr("cx", 50)
+            //         .attr("cy", 10)
+            //         .attr("ry", 13.6)
+            //         .attr("fill", "green")
+            //         .attr("opacity", 0.5)
+
+
+            // adds the text to the node
+            node.append("text")
+                .attr("dy", 3)
+                .attr("y", (d) => d.children ? 0 : 20)
+                .attr("x", (d) => d.children ? -20 : 20)
+                .style("text-anchor", (d) => d.children ? "end" : "start")
+                .text((d) => d.data.type);
+
+           node.on('mouseover', function (data) {
+               node.append("text")
+                   .attr("dy", 3)
+                   .attr("y", (d) => d.children ? -20 : 20)
+                   .attr("x", (d) => d.children ? -20 : 20)
+                   .style("text-anchor", (d) => d.children ? "end" : "start")
+                   .text((d) => d.data.text);
+
+
+           });
+
+        node.on('mouseout', function (data) {
+
+            node.append("text")
+                .attr("dy", 3)
+                .attr("y", (d) => d.children ? -20 : 20)
+                .attr("x", (d) => d.children ? -20 : 20)
+                .style("text-anchor", "")
+                .text("");
+
+        })
+
+
+
+        }
+    );
 </script>
 </body>
 </html>

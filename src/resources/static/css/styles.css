@@ -89,6 +89,7 @@ header{
     width: 50%;
     background: white;
     margin: 3px;
+    overflow: auto;
 }
 .array-container{
     border-radius: 7px;
