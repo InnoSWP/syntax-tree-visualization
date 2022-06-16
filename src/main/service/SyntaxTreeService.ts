@@ -7,11 +7,32 @@ parser.setLanguage(JavaScript)
 
 export class SyntaxTreeService {
     #ind = 0;
+    #code = ""
+    #tree = undefined
+    #array = undefined
 
-    getTreeAndArrayFrom(code: string) {
+    getTreeFrom(code: string) {
+        if (code == this.#code)
+            return this.#tree
+        this.#generate(code)
+        return this.#tree
+    }
+
+    getArrayFrom(code: string) {
+        if (code == this.#code)
+            return this.#array
+        this.#generate(code)
+        return this.#array
+    }
+
+    #generate(code: string) {
         let tree = parser.parse(code);
         let node = tree.rootNode
-        return this.#getTree(node)
+        let ans = this.#getTree(node)
+        this.#code = code
+        // @ts-ignore
+        this.#tree = ans.tree
+        this.#array = ans.arr
     }
 
     #getTree(node: Parser.SyntaxNode) {
