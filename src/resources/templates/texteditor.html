@@ -74,31 +74,43 @@
 
     const f = document.getElementById("tree-cont");
     // Set the dimensions and margins of the diagram
-    var margin = {top: 40, right: 90, bottom: 50, left: 90},
-        w = 500 - margin.left - margin.right,
-        h = 500 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    var svg = d3.select(f).append('svg')
-        .attr('width', w + margin.left + margin.right)
-        .attr('height', h + margin.top + margin.bottom);
-
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var g = svg.append('g')
-        .attr('transform',
-            'translate(' + margin.left + ',' + margin.top + ')');
-
-    // declares a tree layout and assigns the size
-    var tree = d3.tree()
-        .size([w, h]);
     d3.json("/json/testdata.json", function (data) {
+
+
             // Assigns parent
             var nodes = d3.hierarchy(data);
+
+        if (nodes.height >= 10) {
+            var margin = {top: 40, right: 90, bottom: 50, left: 90},
+                w = (nodes.height + 10) * 300 - margin.left - margin.right,
+                h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
+        } else {
+            var margin = {top: 40, right: 90, bottom: 50, left: 90},
+                w = (nodes.height) * 300 - margin.left - margin.right,
+                h = (nodes.height) * 200 - margin.top - margin.bottom;
+        }
+
+        // append the svg object to the body of the page
+            var svg = d3.select(f).append('svg')
+                .attr('width', w + margin.left + margin.right)
+                .attr('height', h + margin.top + margin.bottom);
+
+            // appends a 'group' element to 'svg'
+            // moves the 'group' element to the top left margin
+            var g = svg.append('g')
+                .attr('transform',
+                    'translate(' + margin.left + ',' + margin.top + ')');
+
+            // declares a tree layout and assigns the size
+            var tree = d3.tree()
+                .size([w, h]);
+            console.log(nodes);
 
             // Assigns the x and y position for the nodes
             nodes = tree(nodes);
             console.log(nodes);
+
 
             // adds the links between the nodes
             var link = g.selectAll(".link")
@@ -127,48 +139,52 @@
                 })
                 .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 
-            // adds the circle to the node
-            node.append('circle')
-                .attr('r', 5)
-                .attr('fill', 'black');
-            //     node.append("rect")
-            //         .attr("cx", 50)
-            //         .attr("cy", 10)
-            //         .attr("ry", 13.6)
-            //         .attr("fill", "green")
-            //         .attr("opacity", 0.5)
+            //
+            // node.append('circle')
+            //     .attr('r', 5)
+            //     .attr('fill', 'grey');
 
+            node.append("rect")       // attach a rectangle
+                .attr("x", -40)         // position the left of the rectangle
+                .attr("y", -20)          // position the top of the rectangle
+                .attr("height", 40)    // set the height
+                .attr("width", 80)     // set the width
+                .attr("rx", 1)         // set the x corner curve radius
+                .attr("ry", 1)
+                .attr('fill', 'grey');
 
-            // adds the text to the node
             node.append("text")
                 .attr("dy", 3)
-                .attr("y", (d) => d.children ? 0 : 20)
-                .attr("x", (d) => d.children ? -20 : 20)
+                .style('font-size', "10px")
+                .attr("x", 15)           // set x position of left side of text
+                .attr("y", 0)
+                .attr("text-anchor", "middle")
                 .style("text-anchor", (d) => d.children ? "end" : "start")
                 .text((d) => d.data.type);
 
-           node.on('mouseover', function (data) {
-               node.append("text")
-                   .attr("dy", 3)
-                   .attr("y", (d) => d.children ? -20 : 20)
-                   .attr("x", (d) => d.children ? -20 : 20)
-                   .style("text-anchor", (d) => d.children ? "end" : "start")
-                   .text((d) => d.data.text);
+
+            // adds the text to the node
 
 
-           });
+            node.on('mouseover', function (data) {
+                var g = d3.select(this); // The node
+                // The class is used to remove the additional text later
+                var info = g
+                    .append("text")
+                    .classed("info", true)
+                    .attr("x", -20)
+                    .attr("y", 35)
+                    .text((d) => d.data.text);
 
-        node.on('mouseout', function (data) {
 
-            node.append("text")
-                .attr("dy", 3)
-                .attr("y", (d) => d.children ? -20 : 20)
-                .attr("x", (d) => d.children ? -20 : 20)
-                .style("text-anchor", "")
-                .text("");
+            });
 
-        })
+            node.on('mouseout', function () {
+                d3.select(this)
+                    .select("text.info")
+                    .remove();
 
+            })
 
 
         }
