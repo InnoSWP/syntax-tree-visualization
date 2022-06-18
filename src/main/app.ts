@@ -1,13 +1,10 @@
 import express from "express"
+import path from "path"
+import router from "main/controllers/syntaxTreeController"
 
-let app = express()
+const app = express()
+export default app
 
-function start() {
-    app.listen(8080, () => {
-        console.log("Server started on port 8080")
-    })
-}
+app.use(router)
+app.use(express.static('src/resources/static'))
 
-function addUrl(url: string, callback: (req: Object, res: Object) => void) {
-    app.get(url, callback)
-}

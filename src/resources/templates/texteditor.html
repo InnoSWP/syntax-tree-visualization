@@ -10,21 +10,21 @@
             /*bottom: 0;*/
             /*left: 0;*/
             height: 500px;
-            width:350px;
+            width: 350px;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 
 <header>
     <nav>
-        <div class = "container">
-            <a class = "logo"><img src="/img/logo.svg"></a>
+        <div class="container">
+            <a class="logo"><img src="img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
-                    <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"> </li>
+                    <li><img src="img/share.svg"></li>
+                    <li><img src="img/help.svg"></li>
 
                 </ul>
             </div>
@@ -32,17 +32,50 @@
     </nav>
 </header>
 
-<div id="editor"> function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
-    }
+<div class="flexbox-container">
+    <div class="editor-container">
+        <div id="editor"> function foo(items) {
+            var x = "All this is syntax highlighted";
+            return x;
+            }
+        </div>
+
+    </div>
+
+    <div class="f1-container">
+        <button><img src="img/fullscreen.svg"></button>
+        <div class="vis-container">
+            <div class="tree-container">
+                for tree
+            </div>
+            <div class="array-container">
+                for array
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/javascript");
 </script>
+<div id="tree"></div>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<button type="submit" onclick="
+    let jsonData = {code: 'let x = 1; console.log(x);'};
+    $.ajax({
+    url:'/tree',
+    type: 'GET',
+    contentType: 'application/json',
+    data: jsonData,
+    success: function (data) {
+        document.getElementById('tree').innerText = JSON.stringify(data);
+        console.log(data)
+    }
+    })">Tree
+</button>
 </body>
 </html>
