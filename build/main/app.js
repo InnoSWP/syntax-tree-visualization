@@ -4,12 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-let app = (0, express_1.default)();
-function start() {
-    app.listen(8080, () => {
-        console.log("Server started on port 8080");
-    });
-}
-function addUrl(url, callback) {
-    app.get(url, callback);
-}
+const syntaxTreeController_1 = __importDefault(require("main/controllers/syntaxTreeController"));
+const app = (0, express_1.default)();
+exports.default = app;
+app.use(syntaxTreeController_1.default);
+app.use(express_1.default.static('src/resources/static'));
