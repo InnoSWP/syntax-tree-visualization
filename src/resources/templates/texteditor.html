@@ -12,9 +12,9 @@
             width: 350px;
         }
     </style>
-
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link rel="icon" type="image/x-icon" href="/img/nature.ico">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
 </head>
 <body>
 
@@ -79,9 +79,9 @@
     const f = document.getElementById("tree-cont");
 
 
-    function fun(input) {
-        console.log(input);
-        d3.json(input, function (data) {
+    function fun(data) {
+        //console.log(input);
+
             // Assigns parent
             var nodes = d3.hierarchy(data);
 
@@ -188,34 +188,41 @@
                     .select("text.info")
                     .remove();
 
-            })
+            });
 
 
-        });
-
-
-    }
+        }
 
     // Set the dimensions and margins of the diagram
 
 
 </script>
+
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    function deletion() {
+        $('tree-cont').empty();
+    }
+</script>
 <div id="tree"></div>
 <script src="/js/jquery-3.4.1.min.js"></script>
 <button type="submit" onclick="
-    let jsonData = getvalue('');
-    console.log(jsonData);
+    let jsonData = 'code='+getvalue('');
+    console.log('data'+jsonData);
     $.ajax({
-    url:'http://5.53.124.6/tree',
+    url:'/tree',
     type: 'GET',
     contentType: 'application/json',
     data: jsonData,
     success: function (data) {
         document.getElementById('tree').innerText = JSON.stringify(data);
         //console.log(data);
-        fun( JSON.stringify(data));
+
+        fun( data);
     }
     })">Tree
 </button>
+
+
+
 </body>
 </html>
