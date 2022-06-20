@@ -26,11 +26,11 @@
 <header>
     <nav>
         <div class="container">
-            <a class="logo"><img src="/img/logo.svg"></a>
+            <a class="logo"><img src="img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
-                    <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"></li>
+                    <li><img src="img/share.svg"></li>
+                    <li><img src="img/help.svg"></li>
 
                 </ul>
             </div>
@@ -190,5 +190,19 @@
         }
     );
 </script>
+<div id="tree"></div>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<button type="submit" onclick="
+    let jsonData = {code: 'let x = 1; console.log(x);'};
+    $.ajax({
+    url:'/tree',
+    type: 'GET',
+    contentType: 'application/json',
+    data: jsonData,
+    success: function (data) {
+        document.getElementById('tree').innerText = JSON.stringify(data);
+        console.log(data)
+    }
+    })">Tree
+</button>
 </body>
-</html>

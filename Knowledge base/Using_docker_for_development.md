@@ -18,14 +18,14 @@ Firstly, you need to install [Docker Desktop](https://www.docker.com/products/do
 
 Pull our dev image from the DockerHub
 ```sh
-docker pull skril/devast:latest
+docker pull skril/devast:archlinux
 ```
 
 ### Running container
 
 Run docker container:
 ```sh
-docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-visualization,dst=/app,type=bind skril/devast
+docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-visualization,dst=/app,type=bind skril/devast:archlinux
 ```
 
 **Important:** change "path/to/syntax-tree-visualization" to the root directory of the project
@@ -33,7 +33,7 @@ docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-v
 Alternatively on UNIX operating systems:
 
 ```sh
-docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=bind skril/devast
+docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=bind skril/devast:archlinux
 ```
 
 **Important:** make sure that you are in the directory of the project
