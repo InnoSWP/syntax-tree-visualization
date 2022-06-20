@@ -1,4 +1,4 @@
-FROM node:14
+FROM archlinux
 
 WORKDIR /app
 
@@ -9,8 +9,8 @@ EXPOSE 8080
 # VOLUME ["/app"]
 ADD . .
 
-RUN npm install yarn
+RUN  pacman -Suy --noconfirm arm-none-eabi-newlib nodejs-lts-gallium npm make gcc
 
-RUN yarn
+RUN npm install --global yarn
 
-CMD ["yarn", "start"]
+CMD yarn && yarn start
