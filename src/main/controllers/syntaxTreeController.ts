@@ -48,7 +48,7 @@ router.get('/array', (req, res) => {
         res.write('Arg \'code\' undefined')
     } else {
         res.json(service.getArrayFrom(req.query["code"] as string))
-        console.log(service.getArrayFrom(req.query["code"] as string))
+        // console.log(service.getArrayFrom(req.query["code"] as string))
     }
 })
 
