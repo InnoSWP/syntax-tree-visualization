@@ -8,16 +8,11 @@
         initial-scale=1.0"/>
     <style type="text/css" media="screen">
         #editor {
-            /*position: absolute;*/
-            /*top: 0;*/
-            /*right: 0;*/
-            /*bottom: 0;*/
-            /*left: 0;*/
             height: 500px;
             width: 350px;
         }
     </style>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/img/nature.ico">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
 </head>
@@ -26,11 +21,11 @@
 <header>
     <nav>
         <div class="container">
-            <a class="logo"><img src="img/logo.svg"></a>
+            <a class="logo"><img src="/img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
-                    <li><img src="img/share.svg"></li>
-                    <li><img src="img/help.svg"></li>
+                    <li><img src="/img/share.svg"></li>
+                    <li><img src="/img/help.svg"></li>
 
                 </ul>
             </div>
@@ -40,19 +35,15 @@
 
 <div class="flexbox-container">
     <div class="editor-container">
-        <div id="editor"> let x = 1;
-            console.log(x);
-        </div>
+        <div id="editor"></div>
     </div>
 
     <div class="f1-container">
         <button><img src="/img/fullscreen.svg"></button>
         <div class="vis-container">
             <div class="tree-container" id="tree-cont">
-
             </div>
             <div class="array-container">
-
             </div>
         </div>
     </div>
@@ -67,31 +58,56 @@
     editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/javascript");
 
+
+        editor.session.on('change', function (delta) {
+
+            delta = JSON.stringify(editor.getValue(0));
+           // console.log(delta);
+            let jsonData = 'code='+getvalue('');
+
+
+            $.ajax({
+                url:'/tree',
+                type: 'GET',
+                contentType: 'application/json',
+                data: jsonData,
+                success: function (data) {
+                    document.getElementById('tree').innerText = JSON.stringify(data);
+                    console.log(data);
+
+                    fun( data);
+                }
+            })
+
+        });
+
+    function getvalue(){
+        return JSON.stringify(editor.getValue(''));
+    }
+
+
 </script>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
+
     const f = document.getElementById("tree-cont");
-    // Set the dimensions and margins of the diagram
-
-    d3.json("/json/testdata.json", function (data) {
 
 
+    function fun(data) {
+        //console.log(input);
+            d3.selectAll('svg').remove();
             // Assigns parent
             var nodes = d3.hierarchy(data);
 
-        if (nodes.height >= 10) {
-            var margin = {top: 40, right: 90, bottom: 50, left: 90},
-                w = (nodes.height + 10) * 300 - margin.left - margin.right,
-                h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
-        } else {
-            var margin = {top: 40, right: 90, bottom: 50, left: 90},
-                w = (nodes.height) * 300 - margin.left - margin.right,
-                h = (nodes.height) * 200 - margin.top - margin.bottom;
-        }
 
-        // append the svg object to the body of the page
+                var margin = {top: 40, right: 90, bottom: 50, left: 90},
+                    w = (nodes.height + 10) * 300 - margin.left - margin.right,
+                    h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
+
+
+            // append the svg object to the body of the page
             var svg = d3.select(f).append('svg')
                 .attr('width', w + margin.left + margin.right)
                 .attr('height', h + margin.top + margin.bottom);
@@ -184,16 +200,23 @@
                     .select("text.info")
                     .remove();
 
-            })
+            });
 
 
         }
-    );
+
+    // Set the dimensions and margins of the diagram
+
+
 </script>
+
+
 <div id="tree"></div>
 <script src="/js/jquery-3.4.1.min.js"></script>
 <button type="submit" onclick="
-    let jsonData = {code: 'let x = 1; console.log(x);'};
+
+    let jsonData = '{'+'code='+getvalue('')+'}';
+    console.log('data'+jsonData);
     $.ajax({
     url:'/tree',
     type: 'GET',
@@ -201,7 +224,9 @@
     data: jsonData,
     success: function (data) {
         document.getElementById('tree').innerText = JSON.stringify(data);
-        console.log(data)
+        //console.log(data);
+
+        fun( data);
     }
     })">Tree
 </button>
