@@ -96,6 +96,7 @@ header{
     border-radius: 7px;
     border: 2px solid #D3D6DD;
     height: 650px;
+    max-width: 450px;
     width: 50%;
     background: white;
     margin: 3px;
