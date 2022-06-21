@@ -36,13 +36,23 @@ export class SyntaxTreeService {
     }
 
     #getTree(node: Parser.SyntaxNode) {
-        let tree = {}
+        let tree = {};
         let arr: any = [];
         this.#ind = 0;
-        this.#dfsTree(node, arr, tree)
+
+        this.#dfsTree(node, arr, tree);
+        this.#fillZeroes(arr);
+
         return {tree, arr};
     }
-
+    #fillZeroes(arr:any) {
+        let n = arr.length;
+        let len = arr[n-1].cur_arr.length;
+        for(let i = 0; i < n; ++i) {
+            for(let j = arr[i].cur_arr.length; j < len; ++j)
+                arr[i].cur_arr.push(0);
+        }
+    }
     #dfsTree(node: Parser.SyntaxNode, arr: any, tree: any, depth = 0) {
         if (node == null || node.isMissing())
             return;
@@ -50,17 +60,16 @@ export class SyntaxTreeService {
         tree.text = node.text;
         tree.position = {start: node.startPosition, end: node.endPosition};
         tree.children = [];
-        arr.push([]);
-        let i = 0, prevCount = 0;
-        if (this.#ind > 0) prevCount = arr[this.#ind - 1].length;
+        arr.push({cur_arr:[], text:node.text, type:node.type});
+        let i = 0, prevCount = (this.#ind > 0)? arr[this.#ind - 1].cur_arr.length: 0;
 
         while (i < Math.max(depth + 1, prevCount)) {
             if (i < prevCount)
-                arr[this.#ind].push(arr[this.#ind - 1][i]);
+                arr[this.#ind].cur_arr.push(arr[this.#ind - 1].cur_arr[i]);
             else
-                arr[this.#ind][i] = 0;
+                arr[this.#ind].cur_arr[i] = 0;
             if (depth == i)
-                arr[this.#ind][i]++;
+                arr[this.#ind].cur_arr[i]++;
             ++i;
         }
 

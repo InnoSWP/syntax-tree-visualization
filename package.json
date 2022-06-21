@@ -4,7 +4,7 @@
   "description": "Web application for visualizing abstract syntax tree and syntax array of the code",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/main/index.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register src/main/index.ts",
     "build": "tsc"
   },
   "repository": {

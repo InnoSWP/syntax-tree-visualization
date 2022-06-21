@@ -76,6 +76,18 @@
         console.log(data)
     }
     })">Tree
+</button><button type="submit" onclick="
+    let jsonData = {code: 'let x = 1; console.log(x);'};
+    $.ajax({
+    url:'/array',
+    type: 'GET',
+    contentType: 'application/json',
+    data: jsonData,
+    success: function (data) {
+        document.getElementById('tree').innerText = JSON.stringify(data);
+        console.log(data)
+    }
+    })">Array
 </button>
 </body>
 </html>
