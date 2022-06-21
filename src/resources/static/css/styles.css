@@ -100,5 +100,14 @@ header{
     width: 50%;
     background: white;
     margin: 3px;
+    overflow: auto;
 }
 
+table {
+    width: 100%;
+}
+th, td {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 15px;
+  }
