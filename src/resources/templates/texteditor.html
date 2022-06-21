@@ -60,13 +60,29 @@
 
 
         editor.session.on('change', function (delta) {
+
             delta = JSON.stringify(editor.getValue(0));
-            console.log(delta);
+           // console.log(delta);
+            let jsonData = 'code='+getvalue('');
+
+
+            $.ajax({
+                url:'/tree',
+                type: 'GET',
+                contentType: 'application/json',
+                data: jsonData,
+                success: function (data) {
+                    document.getElementById('tree').innerText = JSON.stringify(data);
+                    console.log(data);
+
+                    fun( data);
+                }
+            })
 
         });
 
     function getvalue(){
-        return JSON.stringify(editor.getValue(0));
+        return JSON.stringify(editor.getValue(''));
     }
 
 
@@ -81,19 +97,15 @@
 
     function fun(data) {
         //console.log(input);
-
+            d3.selectAll('svg').remove();
             // Assigns parent
             var nodes = d3.hierarchy(data);
 
-            if (nodes.height >= 10) {
+
                 var margin = {top: 40, right: 90, bottom: 50, left: 90},
                     w = (nodes.height + 10) * 300 - margin.left - margin.right,
                     h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
-            } else {
-                var margin = {top: 40, right: 90, bottom: 50, left: 90},
-                    w = (nodes.height) * 300 - margin.left - margin.right,
-                    h = (nodes.height) * 200 - margin.top - margin.bottom;
-            }
+
 
             // append the svg object to the body of the page
             var svg = d3.select(f).append('svg')
@@ -198,15 +210,12 @@
 
 </script>
 
-<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    function deletion() {
-        $('tree-cont').empty();
-    }
-</script>
+
 <div id="tree"></div>
 <script src="/js/jquery-3.4.1.min.js"></script>
 <button type="submit" onclick="
-    let jsonData = 'code='+getvalue('');
+
+    let jsonData = '{'+'code='+getvalue('')+'}';
     console.log('data'+jsonData);
     $.ajax({
     url:'/tree',
@@ -221,8 +230,5 @@
     }
     })">Tree
 </button>
-
-
-
 </body>
 </html>
