@@ -25,6 +25,17 @@ router.get('/tree', (req, res) => {
         res.write('Arg \'code\' undefined');
     }
     else {
-        res.json(service.getTreeAndArrayFrom(req.query["code"]));
+        res.json(service.getTreeFrom(req.query["code"]));
+    }
+});
+router.get('/array', (req, res) => {
+    console.log('Get request on /array');
+    if (req.query['code'] == undefined) {
+        console.log('Internal Server Error 500: Arg \'code\' undefined');
+        res.status(500);
+        res.write('Arg \'code\' undefined');
+    }
+    else {
+        res.json(service.getArrayFrom(req.query["code"]));
     }
 });

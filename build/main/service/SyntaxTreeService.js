@@ -11,10 +11,29 @@ let parser = new tree_sitter_1.default();
 parser.setLanguage(tree_sitter_javascript_1.default);
 class SyntaxTreeService {
     #ind = 0;
-    getTreeAndArrayFrom(code) {
+    #code = "";
+    #tree = undefined;
+    #array = undefined;
+    getTreeFrom(code) {
+        if (code == this.#code)
+            return this.#tree;
+        this.#generate(code);
+        return this.#tree;
+    }
+    getArrayFrom(code) {
+        if (code == this.#code)
+            return this.#array;
+        this.#generate(code);
+        return this.#array;
+    }
+    #generate(code) {
         let tree = parser.parse(code);
         let node = tree.rootNode;
-        return this.#getTree(node);
+        let ans = this.#getTree(node);
+        this.#code = code;
+        // @ts-ignore
+        this.#tree = ans.tree;
+        this.#array = ans.arr;
     }
     #getTree(node) {
         let tree = {};

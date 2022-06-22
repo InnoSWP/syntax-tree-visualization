@@ -208,18 +208,38 @@
 </button>
 </body>
 
+<script>
+editor.session.on('change', function (delta) {
 
+    //delta = JSON.stringify(editor.getValue(0));
+    console.log(getvalue());
+    let jsonData = 'code='+editor.getValue();
+
+
+    $.ajax({
+        url:'/array',
+        type: 'GET',
+        contentType: 'application/json',
+        data: jsonData,
+        success: function (data) {
+            document.getElementById('array').innerText = '';
+            building(data);
+        }
+    })
+
+});
+
+function getvalue(){
+    return JSON.stringify(editor.getValue(''));
+}
+</script>
 
 <div id="array"></div>
 <script>
-window.addEventListener("load", () => {
-  // (B) PARSE THE JSON STRING INTO OBJECT FIRST
-  fetch('/json/testdataarray.json')
-  .then (response => response.json())
-  .then(data => {  var table = document.createElement("table"), row, cellA, cellB, cellC;
+  function building (data) {
+   var table = document.createElement("table"), row, cellA, cellB, cellC;
   document.getElementById("array").appendChild(table);
   for (let key in data) {
-    // (C2) ROWS & CELLS
     row = table.insertRow();
     cellA = row.insertCell();
     cellB = row.insertCell();
@@ -228,22 +248,11 @@ window.addEventListener("load", () => {
         cellC.innerHTML = data[key].cur_arr[i];
     }
     
- 
-    // (C3) KEY & VALUE
     cellA.innerHTML = data[key].text;
     cellB.style.backgroundColor = "#438440";
     cellB.style.color = "white";
     cellB.innerHTML = data[key].type;
-    
-
   }
-});
-});
-</script>
+};
 
-<table>
-    <colgroup>
-      <col span="1">
-      <col span="1" style="background-color: #438440">
-    </colgroup>
-</table>
+</script>
