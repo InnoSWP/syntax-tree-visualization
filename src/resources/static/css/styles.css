@@ -87,13 +87,16 @@ header{
     border: 2px solid #D3D6DD;
     height: 650px;
     width: 50%;
+    max-width: 500px;
     background: white;
     margin: 3px;
+    overflow: auto;
 }
 .array-container{
     border-radius: 7px;
     border: 2px solid #D3D6DD;
     height: 650px;
+    max-width: 450px;
     width: 50%;
     background: white;
     margin: 3px;
