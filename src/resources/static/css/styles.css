@@ -52,6 +52,7 @@ a:link {
     align-items: center;
 
 }
+
 button{
    background-color: transparent;
    border: none; 
@@ -173,3 +174,12 @@ text-decoration: none;
 cursor: pointer;
 }
 
+.shareButton {
+    background-color: #438440;
+    color : white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-around;
+}

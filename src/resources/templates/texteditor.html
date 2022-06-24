@@ -24,7 +24,7 @@
             <a class="logo"><img src="/img/logo.svg"></a>
             <div class="header-icons">
                 <ul class="header-icons">
-                    <li><img src="/img/share.svg"></li>
+                    <li><button id="shareButton"><img src="/img/share.svg"></button></li>
                     <li><button id="helpButton"><img src="/img/help.svg"></button></li>
 
                 </ul>
@@ -59,6 +59,23 @@
         <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
         <p>on issues or proposals: <a href="https://t.me/sunya_shine">Alexandr Ragulin</a> </p>
        
+    </div>
+</div>
+
+<div class="b-popup" id="share">
+    <div class="b-popup-content">
+        <button class=”close” id="close">&times;</button>     
+        <h1>Share</h1>
+        <h2>URL</h2>
+        <p>Copy this URL to share the page</p>
+        <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+        <h2>Export to</h2>
+        <div class="shareButton">
+            <button id="format1">Format 1</button>
+            <button id="format2">Format 2</button>
+            <button id="format3">Format 3</button>
+            <button id="format4">Format 4</button>   
+        </div>   
     </div>
 </div>
 
@@ -276,23 +293,41 @@ function getvalue(){
 
 </script>
 
-<!-- <div id="helpButton"></div> -->
 <script>
     var helpWindow = document.getElementById('help');
     var btn = document.getElementById('helpButton');
-    let span = document.getElementById('close');
-    //var span = document.getElementsByClassName('close')[0];
+    let spanHelp = document.getElementById('close');;
     btn.onclick = function() {
         helpWindow.style.display = "block";
     }
     
-    span.onclick = function() {
+    spanHelp.onclick = function() {
         helpWindow.style.display = "none";
     }
 
     window.onclick = function(event) {
     if (event.target == helpWindow) {
         helpWindow.style.display = "none";
+    }
+}
+</script>
+
+<script>
+    var shareWindow = document.getElementById('share');
+    var btn = document.getElementById('shareButton');
+    let spanShare = document.getElementById('close');
+
+    btn.onclick = function() {
+        shareWindow.style.display = "block";
+    }
+    
+    spanShare.onclick = function() {
+        shareWindow.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+    if (event.target == helpWindow) {
+        shareWindow.style.display = "none";
     }
 }
 </script>
