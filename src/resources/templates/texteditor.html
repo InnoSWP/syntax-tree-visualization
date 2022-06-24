@@ -25,7 +25,7 @@
             <div class="header-icons">
                 <ul class="header-icons">
                     <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"></li>
+                    <li><button id="helpButton"><img src="/img/help.svg"></button></li>
 
                 </ul>
             </div>
@@ -48,6 +48,17 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="b-popup" id="help">
+    <div class="b-popup-content">
+        <button class=”close” id="close">&times;</button>     
+        <h1>I am Abstract Syntax Tree</h1>
+        <h2>Here you can type code and see its graphic representation</h2>
+        <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+        <p>on issues or proposals: <a href="https://t.me/sunya_shine">Alexandr Ragulin</a> </p>
+       
     </div>
 </div>
 
@@ -263,4 +274,25 @@ function getvalue(){
   }
 };
 
+</script>
+
+<!-- <div id="helpButton"></div> -->
+<script>
+    var helpWindow = document.getElementById('help');
+    var btn = document.getElementById('helpButton');
+    let span = document.getElementById('close');
+    //var span = document.getElementsByClassName('close')[0];
+    btn.onclick = function() {
+        helpWindow.style.display = "block";
+    }
+    
+    span.onclick = function() {
+        helpWindow.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+    if (event.target == helpWindow) {
+        helpWindow.style.display = "none";
+    }
+}
 </script>
