@@ -174,12 +174,16 @@ text-decoration: none;
 cursor: pointer;
 }
 
-.shareButton {
+
+.container-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+#format1, #format2, #format3 {
     background-color: #438440;
     color : white;
     border: 1px solid black;
     border-radius: 10px;
     padding: 15px 25px;
-    display: flex;
-    justify-content: space-around;
 }
