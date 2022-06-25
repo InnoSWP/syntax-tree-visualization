@@ -1,70 +1,68 @@
 * {
     padding: 0;
     margin: 0;
-    color: black
-}
-
-body {
-    background: #EBEBEB;
-}
-
-header {
+    color: black;
+  }
+  
+  body {
+    background: #ebebeb;
+  }
+  
+  header {
     height: 73px;
     width: 100%;
     background: #438440;
-
-}
-
-h1,
-h2,
-p {
+  }
+  
+  h1,
+  h2,
+  p {
     text-align: center;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-style: normal;
     margin-bottom: 3%;
-}
-
-a:link {
-    color: black
-}
-
-.logo {
+  }
+  
+  a:link {
+    color: black;
+  }
+  
+  .logo {
     margin-left: 41px;
-}
-
-.container {
+  }
+  
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.header-icons {
+  }
+  
+  .header-icons {
     margin-right: 20px;
-}
-
-.header-icons li {
+  }
+  
+  .header-icons li {
     text-decoration: none;
     display: inline-block;
     margin: 5px;
-}
-
-#editor {
+  }
+  
+  #editor {
     width: 100%;
     height: 700px;
-}
-
-.flexbox-container {
+  }
+  
+  .flexbox-container {
     display: flex;
     align-items: center;
-
-}
-
-button {
+  }
+  
+  button {
     background-color: transparent;
     border: none;
-}
-
-.editor-container {
+  }
+  
+  .editor-container {
     display: flex;
     margin-left: 37px;
     margin-top: 8px;
@@ -72,83 +70,82 @@ button {
     height: 90%;
     width: 400px;
     min-width: 370px;
-    background: #EBEBEB;
+    background: #ebebeb;
     border-radius: 7px;
-    border: 2px solid #D3D6DD;
-}
-
-.f1-container {
+    border: 2px solid #d3d6dd;
+  }
+  
+  .f1-container {
     margin-top: 8px;
     display: flex;
     margin-left: 30px;
     margin-right: 37px;
-    background: #EBEBEB;
+    background: #ebebeb;
     flex-direction: column;
     height: 700px;
     width: 100%;
     border-radius: 7px;
-    border: 2px solid #D3D6DD;
-}
-
-.f1-container button {
+    border: 2px solid #d3d6dd;
+  }
+  
+  .f1-container button {
     margin-top: 3px;
     margin-left: 3px;
     max-width: 33px;
     max-height: 33px;
     border: transparent;
     background: transparent;
-}
-
-.vis-container {
+  }
+  
+  .vis-container {
     display: flex;
     flex-direction: row;
-
-}
-
-.tree-container {
+  }
+  
+  .tree-container {
     border-radius: 7px;
-    border: 2px solid #D3D6DD;
+    border: 2px solid #d3d6dd;
     height: 650px;
     width: 50%;
     max-width: 500px;
     background: white;
     margin: 3px;
     overflow: auto;
-}
-
-.array-container {
+  }
+  
+  .array-container {
     border-radius: 7px;
-    border: 2px solid #D3D6DD;
+    border: 2px solid #d3d6dd;
     height: 650px;
     max-width: 450px;
     width: 50%;
     background: white;
     margin: 3px;
     overflow: auto;
-}
-
-table {
+  }
+  
+  table {
     width: 100%;
-}
-
-th,
-td {
+  }
+  
+  th,
+  td {
     border: 1px solid black;
     border-radius: 10px;
     padding: 15px;
-}
-
-.b-popup {
+  }
+  
+  .b-popup {
     width: 100%;
     min-height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     position: fixed;
     top: 0px;
-}
-
-/* Фон за формой */
-.b-popup {
+  }
+  
+  /* Фон за формой */
+  .b-popup {
     display: none;
     /* Модальное окно скрыто по умолчанию */
     position: fixed;
@@ -163,10 +160,10 @@ td {
     /* 100% по высоте */
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Содержание модального окна*/
-.b-popup-content {
+  }
+  
+  /* Содержание модального окна*/
+  .b-popup-content {
     align-content: center;
     background-color: #fefefe;
     border: 1px solid black;
@@ -176,36 +173,36 @@ td {
     padding: 20px;
     width: 40%;
     /* Может быть больше и меньше, зависит от размеров экрана */
-}
-
-/* Основные свойства кнопки «Закрыть» */
-.close {
+  }
+  
+  /* Основные свойства кнопки «Закрыть» */
+  .close {
     color: black;
     float: right;
     font-size: 28px;
     font-weight: bold;
-}
-
-/* Свойства кнопки «Закрыть», когда вы наводите на нее курсор или взаимодействуете с ней */
-.close:hover,
-.close:focus {
+  }
+  
+  /* Свойства кнопки «Закрыть», когда вы наводите на нее курсор или взаимодействуете с ней */
+  .close:hover,
+  .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-
-.container-buttons {
+  }
+  
+  .container-buttons {
     display: flex;
     justify-content: space-around;
-}
-
-#format1,
-#format2,
-#format3 {
+  }
+  
+  #format1,
+  #format2,
+  #format3 {
     background-color: #438440;
     color: white;
     border: 1px solid black;
     border-radius: 10px;
     padding: 15px 25px;
-}
+  }
+  
