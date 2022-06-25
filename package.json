@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/main/index.ts",
     "build": "tsc",
+    "test": "jest",
     "docker": "docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=bind skril/devast:archlinux"
   },
   "repository": {
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.40",
+    "jest": "^28.1.1",
     "nodemon": "^2.0.16",
     "ts-node": "^10.8.1",
     "ts-node-dev": "^2.0.0",
