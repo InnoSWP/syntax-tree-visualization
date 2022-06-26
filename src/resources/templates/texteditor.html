@@ -65,13 +65,12 @@
 
         //delta = JSON.stringify(editor.getValue(0));
         console.log(getvalue());
-        let jsonData = `{ \"code\": \"${editor.getValue()}\" }`
+        let jsonData = {code: editor.getValue().toString()}
 
 
         $.ajax({
             url: '/tree',
             type: 'POST',
-            contentType: 'application/json',
             data: jsonData,
             success: function (data) {
                 document.getElementById('tree').innerText = JSON.stringify(data);
@@ -221,13 +220,11 @@
 
         //delta = JSON.stringify(editor.getValue(0));
         console.log(getvalue());
-        let jsonData = `{ \"code\": \"${editor.getValue()}\" }`
-
+        let jsonData = {code: editor.getValue()}
 
         $.ajax({
             url: '/array',
             type: 'POST',
-            contentType: 'application/json',
             data: jsonData,
             success: function (data) {
                 document.getElementById('array').innerText = '';
@@ -242,7 +239,6 @@
     }
 </script>
 
-<div id="array"></div>
 <script>
     function building(data) {
         var table = document.createElement("table"), row, cellA, cellB, cellC;
