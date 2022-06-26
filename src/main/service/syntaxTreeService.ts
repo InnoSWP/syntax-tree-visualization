@@ -96,7 +96,7 @@ class SyntaxTreeService {
                 arr[this.#ind].cur_arr.push(arr[this.#ind - 1].cur_arr[i]);
             else
                 arr[this.#ind].cur_arr[i] = 0;
-            if (depth == i){
+            if (depth == i) {
                 arr[this.#ind].cur_arr[i]++;
             }
             ++i;
