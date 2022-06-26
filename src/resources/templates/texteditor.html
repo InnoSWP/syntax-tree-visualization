@@ -65,25 +65,25 @@
 
         //delta = JSON.stringify(editor.getValue(0));
         console.log(getvalue());
-        let jsonData = 'code='+editor.getValue();
+        let jsonData = `{ \"code\": \"${editor.getValue()}\" }`
 
 
         $.ajax({
-            url:'/tree',
-            type: 'GET',
+            url: '/tree',
+            type: 'POST',
             contentType: 'application/json',
             data: jsonData,
             success: function (data) {
                 document.getElementById('tree').innerText = JSON.stringify(data);
                 //console.log('data' + data);
 
-                fun( data);
+                fun(data);
             }
         })
 
     });
 
-    function getvalue(){
+    function getvalue() {
         return JSON.stringify(editor.getValue(''));
     }
 
@@ -221,12 +221,12 @@
 
         //delta = JSON.stringify(editor.getValue(0));
         console.log(getvalue());
-        let jsonData = 'code='+editor.getValue();
+        let jsonData = `{ \"code\": \"${editor.getValue()}\" }`
 
 
         $.ajax({
-            url:'/array',
-            type: 'GET',
+            url: '/array',
+            type: 'POST',
             contentType: 'application/json',
             data: jsonData,
             success: function (data) {
@@ -237,14 +237,14 @@
 
     });
 
-    function getvalue(){
+    function getvalue() {
         return JSON.stringify(editor.getValue(''));
     }
 </script>
 
 <div id="array"></div>
 <script>
-    function building (data) {
+    function building(data) {
         var table = document.createElement("table"), row, cellA, cellB, cellC;
         document.getElementById("array").appendChild(table);
         for (let key in data) {
@@ -261,6 +261,6 @@
             cellB.style.color = "white";
             cellB.innerHTML = data[key].type;
         }
-    };
+    }
 
 </script>

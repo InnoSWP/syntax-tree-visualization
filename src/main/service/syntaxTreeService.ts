@@ -5,7 +5,7 @@ import JavaScript from 'tree-sitter-javascript'
 let parser = new Parser()
 parser.setLanguage(JavaScript)
 
-export class SyntaxTreeService {
+class SyntaxTreeService {
     #ind = 0;
     #code = ""
     #tree = undefined
@@ -41,11 +41,11 @@ export class SyntaxTreeService {
         this.#ind = 0;
 
         this.#dfsTree(node, arr, tree);
-        this.#fillZeroes(arr);
+        SyntaxTreeService.#fillZeroes(arr);
 
         return {tree, arr};
     }
-    #fillZeroes(arr:any) {
+    static #fillZeroes(arr:any) {
         let n = arr.length;
         let len = arr[n-1].cur_arr.length;
         for(let i = 0; i < n; ++i) {
@@ -81,3 +81,5 @@ export class SyntaxTreeService {
         }
     }
 }
+
+export const syntaxTreeService = new SyntaxTreeService()
