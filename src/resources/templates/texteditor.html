@@ -2,339 +2,338 @@
 <html lang="en">
 
 <head>
-    <title>ACE in Action</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" path1tent="width=device-width,
+	<title>ACE in Action</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" path1tent="width=device-width,
         initial-scale=1.0" />
-    <style type="text/css" media="screen">
-        #editor {
-            height: 500px;
-            width: 350px;
-        }
-    </style>
-    <link rel="icon" type="image/x-icon" href="/img/nature.ico">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<style type="text/css" media="screen">
+		#editor {
+			height: 500px;
+			width: 350px;
+		}
+	</style>
+	<link rel="icon" type="image/x-icon" href="/img/nature.ico">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="container">
-                <a class="logo"><img src="/img/logo.svg" alt="Logo"></a>
-                <div class="header-icons">
-                    <ul class="header-icons">
-                        <li><button id="share-button"><img src="/img/share.svg" alt="Share button"></button></li>
-                        <li><button id="help-button"><img src="/img/help.svg" alt="Help button"></button></li>
+	<header>
+		<nav>
+			<div class="container">
+				<a class="logo"><img src="/img/logo.svg" alt="Logo"></a>
+				<div class="header-icons">
+					<ul class="header-icons">
+						<li><button id="share-button"><img src="/img/share.svg" alt="Share button"></button></li>
+						<li><button id="help-button"><img src="/img/help.svg" alt="Help button"></button></li>
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    <div class="flexbox-container">
-        <div class="editor-container">
-            <div id="editor"></div>
-        </div>
+	<div class="flexbox-container">
+		<div class="editor-container">
+			<div id="editor"></div>
+		</div>
 
-        <div class="f1-container">
-            <button><img src="/img/fullscreen.svg" alt="Screen"></button>
-            <div class="vis-container">
-                <div class="tree-container" id="tree-cont">
-                </div>
+		<div class="f1-container">
+			<button><img src="/img/fullscreen.svg" alt="Screen"></button>
+			<div class="vis-container">
+				<div class="tree-container" id="tree-cont">
+				</div>
 
-                <div class="array-container" id="array">
+				<div class="array-container" id="array">
 
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="b-popup" id="help">
-        <div class="b-popup-content">
-            <button class="close" id="helpclose">&times;</button>
-            <h1>I am Abstract Syntax Tree</h1>
-            <h2>Here you can type code and see its graphic representation</h2>
-            <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
-            <p>on issues or proposals: <a href="https://t.me/sunya_shine">Alexandr Ragulin</a> </p>
+	<div class="b-popup" id="help">
+		<div class="b-popup-content">
+			<button class="close" id="helpclose">&times;</button>
+			<h1>I am Abstract Syntax Tree</h1>
+			<h2>Here you can type code and see its graphic representation</h2>
+			<p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+			<p>on issues or proposals: <a href="https://t.me/sunya_shine">Alexandr Ragulin</a> </p>
 
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <div class="b-popup" id="share">
-        <div class="b-popup-content">
-            <button class="close" id="shareclose">&times;</button>
-            <h1>Share</h1>
-            <h2>URL</h2>
-            <p>Copy this URL to share the page</p>
-            <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
-            <h2>Export to</h2>
-            <div class="container-buttons">
-                <button id="format1">format 1</button>
-                <button id="format2">format 2</button>
-                <button id="format3">format 3</button>
-            </div>
-        </div>
-    </div>
-
-
-    <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<div class="b-popup" id="share">
+		<div class="b-popup-content">
+			<button class="close" id="shareclose">&times;</button>
+			<h1>Share</h1>
+			<h2>URL</h2>
+			<p>Copy this URL to share the page</p>
+			<p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+			<h2>Export to</h2>
+			<div class="container-buttons">
+				<button id="format1">format 1</button>
+				<button id="format2">format 2</button>
+				<button id="format3">format 3</button>
+			</div>
+		</div>
+	</div>
 
 
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/xcode");
-        editor.session.setMode("ace/mode/javascript");
+	<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
-    editor.session.on('change', function (delta) {
+	<script>
+		var editor = ace.edit("editor");
+		editor.setTheme("ace/theme/xcode");
+		editor.session.setMode("ace/mode/javascript");
 
 
-            //delta = JSON.stringify(editor.getValue(0));
-            console.log(getvalue());
-            let jsonData = 'code=' + editor.getValue();
+		editor.session.on('change', function (delta) {
 
 
-            $.ajax({
-                url: '/tree',
-                type: 'GET',
-                contentType: 'application/json',
-                data: jsonData,
-                success: function (data) {
-                    document.getElementById('tree').innerText = JSON.stringify(data);
-                    //console.log('data' + data);
-
-                    fun(data);
-                }
-            })
+			//delta = JSON.stringify(editor.getValue(0));
+			console.log(getvalue());
+			let jsonData = 'code=' + editor.getValue();
 
 
-    });
+			$.ajax({
+				url: '/tree',
+				type: 'GET',
+				contentType: 'application/json',
+				data: jsonData,
+				success: function (data) {
+					document.getElementById('tree').innerText = JSON.stringify(data);
+					//console.log('data' + data);
+
+					fun(data);
+				}
+			})
 
 
-        function getvalue() {
-            return JSON.stringify(editor.getValue(''));
-        }
+		});
 
 
-
-    </script>
-
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
-
-
-        const f = document.getElementById("tree-cont");
+		function getvalue() {
+			return JSON.stringify(editor.getValue(''));
+		}
 
 
 
-        function fun(data) {
-            //console.log(input);
-            d3.selectAll('svg').remove();
-            // Assigns parent
-            var nodes = d3.hierarchy(data);
+	</script>
+
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script>
 
 
-            var margin = { top: 40, right: 90, bottom: 50, left: 90 },
-                w = (nodes.height + 5) * 100 - margin.left - margin.right,
-                h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
-
-
-            // append the svg object to the body of the page
-            var svg = d3.select(f).append('svg')
-                .attr('width', w + margin.left + margin.right)
-                .attr('height', h + margin.top + margin.bottom);
-
-            // appends a 'group' element to 'svg'
-            // moves the 'group' element to the top left margin
-            var g = svg.append('g')
-                .attr('transform',
-                    'translate(' + margin.left + ',' + margin.top + ')');
-
-            // declares a tree layout and assigns the size
-            var tree = d3.tree()
-                .size([w, h]);
-            console.log(nodes);
-
-            // Assigns the x and y position for the nodes
-            nodes = tree(nodes);
-            console.log(nodes);
-
-
-            // adds the links between the nodes
-            var link = g.selectAll(".link")
-                .data(nodes.descendants().slice(1))
-                .enter()
-                .append("path")
-                .attr("class", "link")
-                .attr("d", (d) => {
-                    return "M" + d.x + "," + d.y
-                        + "C" + d.x + "," + (d.y + d.parent.y) / 2
-                        + " " + d.parent.x + "," + (d.y + d.parent.y) / 2
-                        + " " + d.parent.x + "," + d.parent.y;
-                })
-                .attr('fill', 'none')
-                .attr('stroke', '#438440')
-                .attr('stroke-width', 1.5);
-
-            // adds each node as a group
-            var node = g.selectAll('.node')
-                .data(nodes.descendants())
-                .enter()
-                .append('g')
-                .attr('class', (d) => {
-                    return "node" +
-                        (d.children ? " node--internal" : " node--leaf");
-                })
-                .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
-
-            //
-            // node.append('circle')
-            //     .attr('r', 5)
-            //     .attr('fill', 'grey');
-
-            node.append("rect")       // attach a rectangle
-                .attr("x", -40)         // position the left of the rectangle
-                .attr("y", -20)          // position the top of the rectangle
-                .attr("height", 40)    // set the height
-                .attr("width", 80)     // set the width
-                .attr("rx", 1)         // set the x corner curve radius
-                .attr("ry", 1)
-                .attr('fill', 'grey');
-
-            node.append("text")
-                .attr("dy", 3)
-                .style('font-size', "10px")
-                .attr("x", 15)           // set x position of left side of text
-                .attr("y", 0)
-                .attr("text-anchor", "middle")
-                .style("text-anchor", (d) => d.children ? "end" : "start")
-                .text((d) => d.data.type);
-
-
-            // adds the text to the node
-
-
-            node.on('mouseover', function (data) {
-                var g = d3.select(this); // The node
-                // The class is used to remove the additional text later
-                var info = g
-                    .append("text")
-                    .classed("info", true)
-                    .attr("x", -20)
-                    .attr("y", 35)
-                    .text((d) => d.data.text);
-
-
-            });
-
-            node.on('mouseout', function () {
-                d3.select(this)
-                    .select("text.info")
-                    .remove();
-
-            });
+		const f = document.getElementById("tree-cont");
 
 
 
-        });
-
-        node.on('mouseout', function () {
-            d3.select(this)
-                .select("text.info")
-                .remove();
-
-        });
+		function fun(data) {
+			//console.log(input);
+			d3.selectAll('svg').remove();
+			// Assigns parent
+			var nodes = d3.hierarchy(data);
 
 
-    }
+			var margin = {top: 40, right: 90, bottom: 50, left: 90},
+				w = (nodes.height + 5) * 100 - margin.left - margin.right,
+				h = (nodes.height + 5) * 100 - margin.top - margin.bottom;
+
+
+			// append the svg object to the body of the page
+			var svg = d3.select(f).append('svg')
+				.attr('width', w + margin.left + margin.right)
+				.attr('height', h + margin.top + margin.bottom);
+
+			// appends a 'group' element to 'svg'
+			// moves the 'group' element to the top left margin
+			var g = svg.append('g')
+				.attr('transform',
+					'translate(' + margin.left + ',' + margin.top + ')');
+
+			// declares a tree layout and assigns the size
+			var tree = d3.tree()
+				.size([w, h]);
+			console.log(nodes);
+
+			// Assigns the x and y position for the nodes
+			nodes = tree(nodes);
+			console.log(nodes);
+
+
+			// adds the links between the nodes
+			var link = g.selectAll(".link")
+				.data(nodes.descendants().slice(1))
+				.enter()
+				.append("path")
+				.attr("class", "link")
+				.attr("d", (d) => {
+					return "M" + d.x + "," + d.y
+						+ "C" + d.x + "," + (d.y + d.parent.y) / 2
+						+ " " + d.parent.x + "," + (d.y + d.parent.y) / 2
+						+ " " + d.parent.x + "," + d.parent.y;
+				})
+				.attr('fill', 'none')
+				.attr('stroke', '#438440')
+				.attr('stroke-width', 1.5);
+
+			// adds each node as a group
+			var node = g.selectAll('.node')
+				.data(nodes.descendants())
+				.enter()
+				.append('g')
+				.attr('class', (d) => {
+					return "node" +
+						(d.children ? " node--internal" : " node--leaf");
+				})
+				.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+
+			//
+			// node.append('circle')
+			//     .attr('r', 5)
+			//     .attr('fill', 'grey');
+
+			node.append("rect")       // attach a rectangle
+				.attr("x", -40)         // position the left of the rectangle
+				.attr("y", -20)          // position the top of the rectangle
+				.attr("height", 40)    // set the height
+				.attr("width", 80)     // set the width
+				.attr("rx", 1)         // set the x corner curve radius
+				.attr("ry", 1)
+				.attr('fill', 'grey');
+
+			node.append("text")
+				.attr("dy", 3)
+				.style('font-size', "10px")
+				.attr("x", 15)           // set x position of left side of text
+				.attr("y", 0)
+				.attr("text-anchor", "middle")
+				.style("text-anchor", (d) => d.children ? "end" : "start")
+				.text((d) => d.data.type);
+
+
+			// adds the text to the node
+
+
+			node.on('mouseover', function (data) {
+				var g = d3.select(this); // The node
+				// The class is used to remove the additional text later
+				var info = g
+					.append("text")
+					.classed("info", true)
+					.attr("x", -20)
+					.attr("y", 35)
+					.text((d) => d.data.text);
+
+
+			});
+
+			node.on('mouseout', function () {
+				d3.select(this)
+					.select("text.info")
+					.remove();
+
+			});
+
+
+
+			node.on('mouseout', function () {
+				d3.select(this)
+					.select("text.info")
+					.remove();
+
+			});
+
+
+		}
 
     // Set the dimensions and margins of the diagram
 
 
-    </script>
+	</script>
 
-    <div id="tree"></div>
-    <script src="/js/jquery-3.4.1.min.js"></script>
+	<div id="tree"></div>
+	<script src="/js/jquery-3.4.1.min.js"></script>
 </body>
 
 <script>
-    editor.session.on('change', function (delta) {
+	editor.session.on('change', function (delta) {
 
 
-        //delta = JSON.stringify(editor.getValue(0));
-        console.log(getvalue());
-        let jsonData = 'code=' + editor.getValue();
+		//delta = JSON.stringify(editor.getValue(0));
+		console.log(getvalue());
+		let jsonData = 'code=' + editor.getValue();
 
 
-        $.ajax({
-            url: '/array',
-            type: 'GET',
-            contentType: 'application/json',
-            data: jsonData,
-            success: function (data) {
-                document.getElementById('array').innerText = '';
-                building(data);
-            }
-        })
+		$.ajax({
+			url: '/array',
+			type: 'GET',
+			contentType: 'application/json',
+			data: jsonData,
+			success: function (data) {
+				document.getElementById('array').innerText = '';
+				building(data);
+			}
+		})
 
-    });
+	});
 
-    function getvalue() {
-        return JSON.stringify(editor.getValue(''));
-    }
+	function getvalue() {
+		return JSON.stringify(editor.getValue(''));
+	}
 </script>
 
 <script>
-    function building(data) {
-        var table = document.createElement("table"), row, cellA, cellB, cellC;
-        document.getElementById("array").appendChild(table);
-        for (let key in data) {
-            row = table.insertRow();
-            cellA = row.insertCell();
-            cellB = row.insertCell();
-            for (let i in data[key].cur_arr) {
-                cellC = row.insertCell();
-                cellC.innerHTML = data[key].cur_arr[i];
-            }
+	function building(data) {
+		var table = document.createElement("table"), row, cellA, cellB, cellC;
+		document.getElementById("array").appendChild(table);
+		for (let key in data) {
+			row = table.insertRow();
+			cellA = row.insertCell();
+			cellB = row.insertCell();
+			for (let i in data[key].cur_arr) {
+				cellC = row.insertCell();
+				cellC.innerHTML = data[key].cur_arr[i];
+			}
 
-            cellA.innerHTML = data[key].text;
-            cellB.style.backgroundColor = "#438440";
-            cellB.style.color = "white";
-            cellB.innerHTML = data[key].type;
-        }
-    };
+			cellA.innerHTML = data[key].text;
+			cellB.style.backgroundColor = "#438440";
+			cellB.style.color = "white";
+			cellB.innerHTML = data[key].type;
+		}
+	};
 
 </script>
 
 <script>
-    var helpWindow = document.getElementById("help");
-    var btn = document.getElementById("help-button");
-    let spanHelp = document.getElementById("helpclose");
-    btn.onclick = function () {
-        helpWindow.style.display = "block";
-    }
+	var helpWindow = document.getElementById("help");
+	var btn = document.getElementById("help-button");
+	let spanHelp = document.getElementById("helpclose");
+	btn.onclick = function () {
+		helpWindow.style.display = "block";
+	}
 
-    spanHelp.onclick = function () {
-        helpWindow.style.display = "none";
+	spanHelp.onclick = function () {
+		helpWindow.style.display = "none";
 
-    }
+	}
 </script>
 
 <script>
 
-    var shareWindow = document.getElementById("share");
-    var btn = document.getElementById("share-button");
-    let spanShare = document.getElementById("shareclose");
+	var shareWindow = document.getElementById("share");
+	var btn = document.getElementById("share-button");
+	let spanShare = document.getElementById("shareclose");
 
-    btn.onclick = function () {
-        shareWindow.style.display = "block";
-    }
+	btn.onclick = function () {
+		shareWindow.style.display = "block";
+	}
 
-    spanShare.onclick = function () {
-        shareWindow.style.display = "none";
-    }
+	spanShare.onclick = function () {
+		shareWindow.style.display = "none";
+	}
 </script>
+
 </html>
