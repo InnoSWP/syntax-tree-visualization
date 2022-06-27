@@ -4,7 +4,7 @@
   "description": "Web application for visualizing abstract syntax tree and syntax array of the code",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/main/index.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register src/main/index.ts",
     "build": "tsc",
     "test": "jest",
     "docker": "docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=bind skril/devast:archlinux"
@@ -38,6 +38,7 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "d3": "^7.4.4",
     "express": "^4.18.1",
     "tree-sitter": "^0.20.0",

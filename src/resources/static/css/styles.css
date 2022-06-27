@@ -1,113 +1,187 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-body{
-    background: #EBEBEB;
+* {
+  padding: 0;
+  margin: 0;
+  color: black;
 }
 
-header{
-    height: 73px;
-    width: 100%;
-    background: #438440;
+body {
+  background: #ebebeb;
+}
 
+header {
+  height: 73px;
+  width: 100%;
+  background: #438440;
 }
-.logo{
-    margin-left: 41px;
+
+h1,
+h2,
+p {
+  text-align: center;
+  font-family: Roboto, Assistant, sans-serif;
+  font-style: normal;
+  margin-bottom: 3%;
 }
+
+a:link {
+  color: black;
+}
+
+.logo {
+  margin-left: 41px;
+}
+
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.header-icons{
-    margin-right: 20px ;
+.header-icons {
+  margin-right: 20px;
 }
 
-.header-icons li{
-    text-decoration: none;
-    display: inline-block;
-    margin: 5px;
+.header-icons li {
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
 }
 
-#editor{
-   width: 100%;
-    height: 700px;
+#editor {
+  width: 100%;
+  height: 700px;
 }
 
-.flexbox-container{
-    display: flex;
-    align-items: center;
-
+.flexbox-container {
+  display: flex;
+  align-items: center;
 }
 
-.editor-container{
-    display: flex;
-    margin-left: 37px;
-    margin-top: 8px;
-    align-content: center;
-    height: 90%;
-    width:400px;
-    min-width: 370px;
-    background: #EBEBEB;
-    border-radius: 7px;
-    border: 2px solid #D3D6DD;
-}
-.f1-container{
-    margin-top: 8px;
-    display: flex;
-    margin-left: 30px;
-    margin-right: 37px;
-    background: #EBEBEB;
-    flex-direction: column;
-    height: 700px;
-    width: 100%;
-    border-radius: 7px;
-    border: 2px solid #D3D6DD;
+button {
+  background-color: transparent;
+  border: none;
 }
 
-.f1-container button{
-    margin-top: 3px;
-    margin-left: 3px;
-    max-width: 33px;
-    max-height:33px ;
-    border: transparent;
-    background: transparent;
+.editor-container {
+  display: flex;
+  margin-left: 37px;
+  margin-top: 8px;
+  align-content: center;
+  height: 90%;
+  width: 400px;
+  min-width: 370px;
+  background: #ebebeb;
+  border-radius: 7px;
+  border: 2px solid #d3d6dd;
 }
 
-.vis-container{
-    display: flex;
-    flex-direction:row;
-
+.f1-container {
+  margin-top: 8px;
+  display: flex;
+  margin-left: 30px;
+  margin-right: 37px;
+  background: #ebebeb;
+  flex-direction: column;
+  height: 700px;
+  width: 100%;
+  border-radius: 7px;
+  border: 2px solid #d3d6dd;
 }
 
-.tree-container{
-    border-radius: 7px;
-    border: 2px solid #D3D6DD;
-    height: 650px;
-    width: 50%;
-    max-width: 500px;
-    background: white;
-    margin: 3px;
-    overflow: auto;
+.f1-container button {
+  margin-top: 3px;
+  margin-left: 3px;
+  max-width: 33px;
+  max-height: 33px;
+  border: transparent;
+  background: transparent;
 }
-.array-container{
-    border-radius: 7px;
-    border: 2px solid #D3D6DD;
-    height: 650px;
-    max-width: 450px;
-    width: 50%;
-    background: white;
-    margin: 3px;
-    overflow: auto;
+
+.vis-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.tree-container {
+  border-radius: 7px;
+  border: 2px solid #d3d6dd;
+  height: 650px;
+  width: 50%;
+  max-width: 500px;
+  background: white;
+  margin: 3px;
+  overflow: auto;
+}
+
+.array-container {
+  border-radius: 7px;
+  border: 2px solid #d3d6dd;
+  height: 650px;
+  max-width: 450px;
+  width: 50%;
+  background: white;
+  margin: 3px;
+  overflow: auto;
 }
 
 table {
-    width: 100%;
+  width: 100%;
 }
-th, td {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 15px;
-  }
+
+th,
+td {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.b-popup {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  background-color: rgba(0 0 0 / 40%);
+}
+
+.b-popup-content {
+  align-content: center;
+  background-color: #fefefe;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 20% auto;
+  padding: 20px;
+  width: 40%;
+}
+
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#format1,
+#format2,
+#format3 {
+  background-color: #438440;
+  color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px 25px;
+}
