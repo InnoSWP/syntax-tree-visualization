@@ -89,7 +89,8 @@
         editor.session.setMode("ace/mode/javascript");
 
 
-        editor.session.on('change', function (delta) {
+    editor.session.on('change', function (delta) {
+
 
             //delta = JSON.stringify(editor.getValue(0));
             console.log(getvalue());
@@ -109,11 +110,14 @@
                 }
             })
 
-        });
+
+    });
+
 
         function getvalue() {
             return JSON.stringify(editor.getValue(''));
         }
+
 
 
     </script>
@@ -123,6 +127,7 @@
 
 
         const f = document.getElementById("tree-cont");
+
 
 
         function fun(data) {
@@ -233,7 +238,18 @@
             });
 
 
-        }
+
+        });
+
+        node.on('mouseout', function () {
+            d3.select(this)
+                .select("text.info")
+                .remove();
+
+        });
+
+
+    }
 
     // Set the dimensions and margins of the diagram
 
@@ -246,6 +262,7 @@
 
 <script>
     editor.session.on('change', function (delta) {
+
 
         //delta = JSON.stringify(editor.getValue(0));
         console.log(getvalue());
@@ -302,10 +319,12 @@
 
     spanHelp.onclick = function () {
         helpWindow.style.display = "none";
+
     }
 </script>
 
 <script>
+
     var shareWindow = document.getElementById("share");
     var btn = document.getElementById("share-button");
     let spanShare = document.getElementById("shareclose");
