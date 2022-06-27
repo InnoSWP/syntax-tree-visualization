@@ -1,4 +1,5 @@
 node_modules/
+/build/resources/static/ace-builds/
 # User-specific stuff
 .idea/
 
