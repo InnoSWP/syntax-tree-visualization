@@ -4,16 +4,15 @@
 	</p>
 </h1>
 
-Syntax tree visualizer provides interactive environment for exploration
-of AST[^1] (abstract
-syntax tree) and SA[^2] (syntax array).
+Syntax tree visualizer provides interactive environment for exploration of
+AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 
 ## Features
 
 -   [x] Code editor with syntax checker
--   [ ] AST representation that updates as you type
-    -   [ ] Additional information about node on hover
--   [ ] SA representation that updates as you type
+-   [x] AST representation that updates as you type
+    -   [x] Additional information about node on hover
+-   [x] SA representation that updates as you type
 -   [ ] Highlighting of corresponding elements
 -   [ ] Sharing your projects with others
 -   [ ] Exporting to various formats
@@ -25,6 +24,10 @@ syntax tree) and SA[^2] (syntax array).
 
 -   [x] JavaScript
 
+## Demo
+
+TBD
+
 ## Development
 
 Following these instructions you will get you a copy of the project up
@@ -32,19 +35,22 @@ and running on your local machine for development and testing purposes.
 
 **Clone the repo**
 
-    git clone https://github.com/InnoSWP/syntax-tree-visualization
+```sh
+git clone https://github.com/InnoSWP/syntax-tree-visualization
+```
 
 **Initiate and download all submodules**
 
 ```
-
 git submodule init
 git submodule update
 ```
 
 ### Using docker
 
-    docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-visualization,dst=/app,type=bind skril/devast:archlinux
+```sh
+docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-visualization,dst=/app,type=bind skril/devast:archlinux
+```
 
 **Important:** change "path/to/syntax-tree-visualization" to the root directory of the project
 
@@ -58,21 +64,34 @@ docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=b
 
 Requirements:
 
--   [Node.js](https://nodejs.org/en/)
--   [Yarn](https://yarnpkg.com/getting-started/install)
--   [Git](https://git-scm.com/downloads)
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Git](https://git-scm.com/downloads)
 
 **Install dependencies**
-
 ```shell
 yarn
 ```
-
 **Start server without building it** on http://localhost:8080/
-
 ```shell
 yarn start
 ```
+## Self-hosting
+
+Currently, only development version is available
+
+## Contribution
+
+Pull requests are welcome. For major changes, please open an
+[issue](https://github.com/InnoSWP/syntax-tree-visualization/issues/new) first
+to discuss what you would like to change.
+
+## Notable used tools
+
+- [Tree-sitter node](https://github.com/tree-sitter/node-tree-sitter)
+- [Docker](https://www.docker.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Ace Editor](https://ace.c9.io/)
 
 ## Links
 
