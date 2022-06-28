@@ -90,7 +90,7 @@
     editor.session.setMode("ace/mode/javascript");
 
 
-    editor.session.on('change', function (delta) {
+		editor.session.on('change', function (delta) {
 
 
         //delta = JSON.stringify(editor.getValue(0));
@@ -112,7 +112,7 @@
         })
 
 
-    });
+		});
 
 
     function getvalue() {
@@ -233,14 +233,12 @@
                 .text((d) => d.data.text);
 
 
-        });
+			node.on('mouseout', function () {
+				d3.select(this)
+					.select("text.info")
+					.remove();
 
-        node.on('mouseout', function () {
-            d3.select(this)
-                .select("text.info")
-                .remove();
-
-        });
+			});
 
         node.on('mouseout', function () {
             d3.select(this)
@@ -259,80 +257,81 @@
 </body>
 
 <script>
-    editor.session.on('change', function (delta) {
+	editor.session.on('change', function (delta) {
 
 
-        //delta = JSON.stringify(editor.getValue(0));
-        console.log(getvalue());
-        let jsonData = 'code=' + editor.getValue();
+		//delta = JSON.stringify(editor.getValue(0));
+		console.log(getvalue());
+		let jsonData = 'code=' + editor.getValue();
 
 
-        $.ajax({
-            url: '/array',
-            type: 'GET',
-            contentType: 'application/json',
-            data: jsonData,
-            success: function (data) {
-                document.getElementById('array').innerText = '';
-                building(data);
-            }
-        })
+		$.ajax({
+			url: '/array',
+			type: 'GET',
+			contentType: 'application/json',
+			data: jsonData,
+			success: function (data) {
+				document.getElementById('array').innerText = '';
+				building(data);
+			}
+		})
 
-    });
+	});
 
-    function getvalue() {
-        return JSON.stringify(editor.getValue(''));
-    }
+	function getvalue() {
+		return JSON.stringify(editor.getValue(''));
+	}
 </script>
 
 <script>
-    function building(data) {
-        var table = document.createElement("table"), row, cellA, cellB, cellC;
-        document.getElementById("array").appendChild(table);
-        for (let key in data) {
-            row = table.insertRow();
-            cellA = row.insertCell();
-            cellB = row.insertCell();
-            for (let i in data[key].cur_arr) {
-                cellC = row.insertCell();
-                cellC.innerHTML = data[key].cur_arr[i];
-            }
+	function building(data) {
+		var table = document.createElement("table"), row, cellA, cellB, cellC;
+		document.getElementById("array").appendChild(table);
+		for (let key in data) {
+			row = table.insertRow();
+			cellA = row.insertCell();
+			cellB = row.insertCell();
+			for (let i in data[key].cur_arr) {
+				cellC = row.insertCell();
+				cellC.innerHTML = data[key].cur_arr[i];
+			}
 
-            cellA.innerHTML = data[key].text;
-            cellB.style.backgroundColor = "#438440";
-            cellB.style.color = "white";
-            cellB.innerHTML = data[key].type;
-        }
-    };
+			cellA.innerHTML = data[key].text;
+			cellB.style.backgroundColor = "#438440";
+			cellB.style.color = "white";
+			cellB.innerHTML = data[key].type;
+		}
+	};
 
 </script>
 
 <script>
-    var helpWindow = document.getElementById("help");
-    var btn = document.getElementById("help-button");
-    let spanHelp = document.getElementById("helpclose");
-    btn.onclick = function () {
-        helpWindow.style.display = "block";
-    }
+	var helpWindow = document.getElementById("help");
+	var btn = document.getElementById("help-button");
+	let spanHelp = document.getElementById("helpclose");
+	btn.onclick = function () {
+		helpWindow.style.display = "block";
+	}
 
-    spanHelp.onclick = function () {
-        helpWindow.style.display = "none";
+	spanHelp.onclick = function () {
+		helpWindow.style.display = "none";
 
-    }
+	}
 </script>
 
 <script>
 
-    var shareWindow = document.getElementById("share");
-    var btn = document.getElementById("share-button");
-    let spanShare = document.getElementById("shareclose");
+	var shareWindow = document.getElementById("share");
+	var btn = document.getElementById("share-button");
+	let spanShare = document.getElementById("shareclose");
 
-    btn.onclick = function () {
-        shareWindow.style.display = "block";
-    }
+	btn.onclick = function () {
+		shareWindow.style.display = "block";
+	}
 
-    spanShare.onclick = function () {
-        shareWindow.style.display = "none";
-    }
+	spanShare.onclick = function () {
+		shareWindow.style.display = "none";
+	}
 </script>
+
 </html>
