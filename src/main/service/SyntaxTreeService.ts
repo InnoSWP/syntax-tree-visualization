@@ -90,7 +90,8 @@ export class SyntaxTreeService {
     }
     #addArray(node: Parser.SyntaxNode, arr: any, depth:number) {
         let i = 0, prevCount = (this.#ind > 0)? arr[this.#ind - 1].cur_arr.length: 0;
-        arr.push({cur_arr:[], text:node.text, type:node.type});
+        arr.push({cur_arr:[], text:node.text,
+            type:node.type, position:{start: node.startPosition, end: node.endPosition}});
 
         while (i < Math.max(depth + 1, prevCount)) {
             if (i < prevCount)
