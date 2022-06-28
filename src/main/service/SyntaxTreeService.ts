@@ -79,8 +79,8 @@ export class SyntaxTreeService {
         let len = arr.length-1;
         for(let i = len; i > 0; --i){
             for(let j = arr[i].cur_arr.length-1; j > 0; --j){
-                if(arr[i-1].cur_arr[j] == 0)
-                    return;
+                // if(arr[i-1].cur_arr[j] == 0)
+                //     return;
                 if(arr[i].cur_arr[j] == arr[i-1].cur_arr[j])
                     arr[i].cur_arr[j] = 0;
                 else
