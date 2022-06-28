@@ -3,11 +3,10 @@
 	"display": "Node 18",
 	"compilerOptions": {
 		"lib": [
-			"es2022"
+			"es2022", "dom"
 		],
 		"module": "commonjs",
 		"target": "es2022",
-		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
@@ -16,6 +15,8 @@
 		"outDir" : "./build",
 		"baseUrl": "./src",
 		"allowJs": true,
-		"checkJs": true
+		"checkJs": true,
+		"noImplicitAny": false,
+		"compileNamespace": "es"
 	}
 }
