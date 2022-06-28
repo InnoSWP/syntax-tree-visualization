@@ -3,9 +3,9 @@ var btn = document.getElementById("share-button");
 let spanShare = document.getElementById("shareclose");
 
 btn.onclick = function () {
-    shareWindow.style.display = "block";
+  shareWindow.style.display = "block";
 }
 
 spanShare.onclick = function () {
-    shareWindow.style.display = "none";
+  shareWindow.style.display = "none";
 }
