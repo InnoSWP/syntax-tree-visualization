@@ -1,0 +1,220 @@
+{
+	"type": "Program",
+	"text": "",
+	"position": {
+		"start": {
+			"row": 0,
+			"column": 0
+		},
+		"end": {
+			"row": 0,
+			"column": 92
+		}
+	},
+	"children": [
+		{
+			"type": "Function Declaration",
+			"text": "Name: sum\nArguments: n",
+			"position": {
+				"start": {
+					"row": 0,
+					"column": 0
+				},
+				"end": {
+					"row": 0,
+					"column": 92
+				}
+			},
+			"children": [
+				{
+					"type": "Function Declaration",
+					"text": "Name: sum2\nArguments: x",
+					"position": {
+						"start": {
+							"row": 0,
+							"column": 20
+						},
+						"end": {
+							"row": 0,
+							"column": 65
+						}
+					},
+					"children": [
+						{
+							"type": "Return Statement",
+							"text": "",
+							"position": {
+								"start": {
+									"row": 0,
+									"column": 45
+								},
+								"end": {
+									"row": 0,
+									"column": 60
+								}
+							},
+							"children": [
+								{
+									"type": "Parenthesized expression",
+									"text": "(x - n)",
+									"position": {
+										"start": {
+											"row": 0,
+											"column": 52
+										},
+										"end": {
+											"row": 0,
+											"column": 59
+										}
+									},
+									"children": [
+										{
+											"type": "Binary Operation",
+											"text": "Operator: -",
+											"position": {
+												"start": {
+													"row": 0,
+													"column": 53
+												},
+												"end": {
+													"row": 0,
+													"column": 58
+												}
+											},
+											"children": [
+												{
+													"type": "Variable",
+													"text": "Name: x",
+													"position": {
+														"start": {
+															"row": 0,
+															"column": 53
+														},
+														"end": {
+															"row": 0,
+															"column": 54
+														}
+													},
+													"children": []
+												},
+												{
+													"type": "Variable",
+													"text": "Name: n",
+													"position": {
+														"start": {
+															"row": 0,
+															"column": 57
+														},
+														"end": {
+															"row": 0,
+															"column": 58
+														}
+													},
+													"children": []
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "Return Statement",
+			"text": "",
+			"position": {
+				"start": {
+					"row": 0,
+					"column": 69
+				},
+				"end": {
+					"row": 0,
+					"column": 91
+				}
+			},
+			"children": [
+				{
+					"type": "Function Call",
+					"text": "Called: sum2",
+					"position": {
+						"start": {
+							"row": 0,
+							"column": 76
+						},
+						"end": {
+							"row": 0,
+							"column": 90
+						}
+					},
+					"children": [
+						{
+							"type": "Function Call",
+							"text": "Called: sum",
+							"position": {
+								"start": {
+									"row": 0,
+									"column": 81
+								},
+								"end": {
+									"row": 0,
+									"column": 89
+								}
+							},
+							"children": [
+								{
+									"type": "Binary Operation",
+									"text": "Operation: -",
+									"position": {
+										"start": {
+											"row": 0,
+											"column": 85
+										},
+										"end": {
+											"row": 0,
+											"column": 88
+										}
+									},
+									"children": [
+										{
+											"type": "Variable",
+											"text": "n",
+											"position": {
+												"start": {
+													"row": 0,
+													"column": 85
+												},
+												"end": {
+													"row": 0,
+													"column": 86
+												}
+											},
+											"children": []
+										},
+										{
+											"type": "Number",
+											"text": "1",
+											"position": {
+												"start": {
+													"row": 0,
+													"column": 87
+												},
+												"end": {
+													"row": 0,
+													"column": 88
+												}
+											},
+											"children": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

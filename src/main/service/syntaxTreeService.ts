@@ -5,7 +5,7 @@ import JavaScript from 'tree-sitter-javascript'
 let parser = new Parser()
 parser.setLanguage(JavaScript)
 
-export class SyntaxTreeService {
+class SyntaxTreeService {
     #ind:number = 0;
     #code:string = ""
     #tree = undefined
@@ -29,7 +29,7 @@ export class SyntaxTreeService {
         this.#badTypes.push(type);
     }
 
-    
+
     getTreeFrom(code: string) {
         if (code == this.#code)
             return this.#tree
@@ -44,7 +44,6 @@ export class SyntaxTreeService {
         return this.#array
     }
 
-    
     #generate(code: string) {
         let tree = parser.parse(code);
         let node = tree.rootNode
@@ -79,8 +78,8 @@ export class SyntaxTreeService {
         let len = arr.length-1;
         for(let i = len; i > 0; --i){
             for(let j = arr[i].cur_arr.length-1; j > 0; --j){
-                // if(arr[i-1].cur_arr[j] == 0)
-                //     return;
+                if(arr[i-1].cur_arr[j] == 0)
+                    return;
                 if(arr[i].cur_arr[j] == arr[i-1].cur_arr[j])
                     arr[i].cur_arr[j] = 0;
                 else
@@ -90,15 +89,14 @@ export class SyntaxTreeService {
     }
     #addArray(node: Parser.SyntaxNode, arr: any, depth:number) {
         let i = 0, prevCount = (this.#ind > 0)? arr[this.#ind - 1].cur_arr.length: 0;
-        arr.push({cur_arr:[], text:node.text,
-            type:node.type, position:{start: node.startPosition, end: node.endPosition}});
+        arr.push({cur_arr:[], text:node.text, type:node.type});
 
         while (i < Math.max(depth + 1, prevCount)) {
             if (i < prevCount)
                 arr[this.#ind].cur_arr.push(arr[this.#ind - 1].cur_arr[i]);
             else
                 arr[this.#ind].cur_arr[i] = 0;
-            if (depth == i){
+            if (depth == i) {
                 arr[this.#ind].cur_arr[i]++;
             }
             ++i;
@@ -108,7 +106,7 @@ export class SyntaxTreeService {
     #dfsTree(node: Parser.SyntaxNode, arr: any, tree: any, depth:number = 0, childCount = 0) {
         if (node == null || node.isMissing())
             return;
-        
+
         if(!this.#badTypes.includes(node.type)){
             tree.type = node.type;
             tree.text = node.text;
@@ -120,7 +118,7 @@ export class SyntaxTreeService {
             this.#addArray(node, arr, depth);
 
         for (let i = 0; i < node.childCount; ++i) {
-            
+
             // @ts-ignore
             if(!this.#badTypes.includes(node.child(i).type)){
                 ++this.#ind;
@@ -137,3 +135,5 @@ export class SyntaxTreeService {
         }
     }
 }
+
+export const syntaxTreeService = new SyntaxTreeService()

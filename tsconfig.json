@@ -3,7 +3,9 @@
 	"display": "Node 18",
 	"compilerOptions": {
 		"lib": [
-			"es2022"
+			"ES2021",
+			"DOM",
+			"ESNext"
 		],
 		"module": "commonjs",
 		"target": "es2022",

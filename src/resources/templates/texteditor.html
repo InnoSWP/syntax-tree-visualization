@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>ACE in Action</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" path1tent=
-            "width=device-width,
+    <meta name="viewport" path1tent="width=device-width,
         initial-scale=1.0"/>
     <style type="text/css" media="screen">
         #editor {
@@ -16,16 +16,21 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
 </head>
+
 <body>
 
 <header>
     <nav>
         <div class="container">
-            <a class="logo"><img src="/img/logo.svg"></a>
+            <a class="logo"><img src="/img/logo.svg" alt="Logo"></a>
             <div class="header-icons">
                 <ul class="header-icons">
-                    <li><img src="/img/share.svg"></li>
-                    <li><img src="/img/help.svg"></li>
+                    <li>
+                        <button id="share-button"><img src="/img/share_new.svg" alt="Share button"></button>
+                    </li>
+                    <li>
+                        <button id="help-button"><img src="/img/help.svg" alt="Help button"></button>
+                    </li>
 
                 </ul>
             </div>
@@ -39,19 +44,24 @@
     </div>
 
     <div class="f1-container">
-        <button><img src="/img/fullscreen.svg"></button>
         <div class="vis-container">
-            <div class="tree-container" id="tree-cont">
-            </div>
-
             <div class="array-container" id="array">
-
+            </div>
+            <div class="tree-container" id="tree-cont">
             </div>
         </div>
     </div>
 </div>
 
+<div class="b-popup" id="help">
+    <div class="b-popup-content">
+        <button class="close" id="helpclose">&times;</button>
+        <h1>I am Abstract Syntax Tree</h1>
+        <h2>Here you can type code and see its graphic representation</h2>
+        <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+        <p>on issues or proposals: <a href="https://t.me/sunya_shine">Alexandr Ragulin</a></p>
 
+<<<<<<< HEAD
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
@@ -208,13 +218,38 @@
     }
 
     // Set the dimensions and margins of the diagram
+=======
+    </div>
+</div>
+>>>>>>> 11efbd06613d02da45698f75967972c46ef22ebb
 
+<div class="b-popup" id="share">
+    <div class="b-popup-content">
+        <button class="close" id="shareclose">&times;</button>
+        <h1>Share</h1>
+        <h2>URL</h2>
+        <p>Copy this URL to share the page</p>
+        <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
+        <h2>Export to</h2>
+        <div class="container-buttons">
+            <button id="format1">format 1</button>
+            <button id="format2">format 2</button>
+            <button id="format3">format 3</button>
+        </div>
+    </div>
+</div>
 
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/ace-builds/src-noconflict/ace.js"></script>
+<script src="https://unpkg.com/d3@7.3.0/dist/d3.min.js"></script>
+<script src="/js/editor.js" type="module" charset="utf-8"></script>
+<script src="/js/tree-builder.js" type="module" charset="utf-8"></script>
+<script src="/js/array-builder.js" type="module" charset="utf-8"></script>
+<script src = "/js/help-window.js" type="module" charset="utf-8"></script>
+<script src = "/js/share-window.js" type="module" charset="utf-8"></script>
 
-<div id="tree"></div>
-<script src="/js/jquery-3.4.1.min.js"></script>
 </body>
+<<<<<<< HEAD
 
 <script>
     editor.session.on('change', function (delta) {
@@ -264,3 +299,6 @@
     };
 
 </script>
+=======
+</html>
+>>>>>>> 11efbd06613d02da45698f75967972c46ef22ebb
