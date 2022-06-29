@@ -1,4 +1,4 @@
-export function building(data) {
+export function building (data) {
   const table = document.createElement('table');
   let row, cellA, cellB, cellC;
   document.getElementById('array').appendChild(table);
