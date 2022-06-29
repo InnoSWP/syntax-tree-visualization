@@ -8,6 +8,7 @@ export function building(data) {
     for (let i in data[key].cur_arr) {
       cellC = row.insertCell();
       cellC.innerHTML = data[key].cur_arr[i];
+      cellC.style.textAlign = "center";
     }
 
     cellA.innerHTML = data[key].text;
