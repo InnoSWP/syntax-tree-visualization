@@ -2,10 +2,10 @@
 
 ## Known bugs
 
-- [ ] Fix "%" symbols
-- [ ] Fix "1 & 2" that gives "1"
-- [ ] Fix "a = 1 % 2" that gives "a%20=%201%20%%202"
-- [ ] Fix "a = 1 + 2" that gives "a = 1 2"
+- [x] Fix "%" symbols
+- [x] Fix "1 & 2" that gives "1"
+- [x] Fix "a = 1 % 2" that gives "a%20=%201%20%%202"
+- [x] Fix "a = 1 + 2" that gives "a = 1 2"
 
 ## Operators
 
