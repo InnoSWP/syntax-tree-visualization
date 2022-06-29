@@ -1,11 +1,16 @@
 // import * as d3 from "d3";
 
+/**
+ * @param {any} data
+ */
 export function generateTree(data) {
   //console.log(input);
   const f = document.getElementById("tree-cont");
+  // @ts-ignore
   d3.selectAll('svg').remove();
 
   // Assigns parent
+  // @ts-ignore
   var nodes = d3.hierarchy(data);
 
 
@@ -15,6 +20,7 @@ export function generateTree(data) {
 
 
   // append the svg object to the body of the page
+  // @ts-ignore
   var svg = d3.select(f).append('svg')
     .attr('width', w + margin.left + margin.right)
     .attr('height', h + margin.top + margin.bottom);
@@ -27,6 +33,7 @@ export function generateTree(data) {
       'translate(' + margin.left + ',' + margin.top + ')');
 
   // declares a tree layout and assigns the size
+  // @ts-ignore
   var tree = d3.tree()
     .size([w, h]);
 
@@ -42,10 +49,8 @@ export function generateTree(data) {
     .append("path")
     .attr("class", "link")
     .attr("d", (d) => {
-      return "M" + d.x + "," + d.y
-        + "C" + d.x + "," + (d.y + d.parent.y) / 2
-        + " " + d.parent.x + "," + (d.y + d.parent.y) / 2
-        + " " + d.parent.x + "," + d.parent.y;
+			// @ts-ignore
+			return `M${d.x},${d.y}C${d.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${(d.y + d.parent.y) / 2} ${d.parent.x},${d.parent.y}`;
     })
     .attr('fill', 'none')
     .attr('stroke', '#438440')
@@ -60,7 +65,8 @@ export function generateTree(data) {
       return "node" +
         (d.children ? " node--internal" : " node--leaf");
     })
-    .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+    // @ts-ignore
+    .attr("transform", (d) => `translate(${d.x},${d.y})`);
 
 
   node.append('circle')
@@ -77,7 +83,8 @@ export function generateTree(data) {
     .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
-  node.on('mouseover', function (data) {
+  node.on('mouseover', function (_data) {
+    // @ts-ignore
     var g = d3.select(this); // The node
     // The class is used to remove the additional text later
     var info = g
@@ -86,11 +93,10 @@ export function generateTree(data) {
       .attr("x", -20)
       .attr("y", 35)
       .text((d) => d.data.text);
-
-
   });
 
   node.on('mouseout', function () {
+    // @ts-ignore
     d3.select(this)
       .select("text.info")
       .remove();
@@ -98,6 +104,7 @@ export function generateTree(data) {
   });
 
   node.on('mouseout', function () {
+    // @ts-ignore
     d3.select(this)
       .select("text.info")
       .remove();

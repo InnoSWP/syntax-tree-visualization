@@ -1,7 +1,7 @@
 var helpWindow = document.getElementById("help");
-var btn = document.getElementById("help-button");
+var button = document.getElementById("help-button");
 let spanHelp = document.getElementById("helpclose");
-btn.onclick = function () {
+button.onclick = function () {
   helpWindow.style.display = "block";
 }
 

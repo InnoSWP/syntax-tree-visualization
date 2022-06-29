@@ -1,7 +1,7 @@
 import {editor} from "./editor.js";
 import {building} from "./building-array.js";
 
-editor.session.on('change', function (delta) {
+editor.session.on('change', function (/** @type {any} */ _delta) {
 
 
   //delta = JSON.stringify(editor.getValue(0));

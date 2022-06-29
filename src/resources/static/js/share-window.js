@@ -1,8 +1,8 @@
 var shareWindow = document.getElementById("share");
-var btn = document.getElementById("share-button");
+var button = document.getElementById("share-button");
 let spanShare = document.getElementById("shareclose");
 
-btn.onclick = function () {
+button.onclick = function () {
   shareWindow.style.display = "block";
 }
 
