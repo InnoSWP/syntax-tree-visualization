@@ -6,13 +6,11 @@ editor.session.on('change', function (/** @type {any} */ _delta) {
 
   //delta = JSON.stringify(editor.getValue(0));
   console.log(getvalue());
-  let jsonData = 'code=' + editor.getValue();
-
+  let jsonData = { code: editor.getValue() };
 
   $.ajax({
     url: '/array',
-    type: 'GET',
-    contentType: 'application/json',
+    type: 'POST',
     data: jsonData,
     success: function (data) {
       document.getElementById('array').innerText = '';

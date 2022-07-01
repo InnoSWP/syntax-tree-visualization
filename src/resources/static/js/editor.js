@@ -8,11 +8,10 @@ editor.setTheme("ace/theme/xcode");
 editor.session.setMode("ace/mode/javascript");
 editor.session.on('change', function (/** @type {any} */ _delta) {
   console.log(getvalue());
-  let jsonData = 'code=' + editor.getValue();
+  let jsonData = { code: editor.getValue() };
   $.ajax({
     url: '/tree',
-    type: 'GET',
-    contentType: 'application/json',
+    type: 'POST',
     data: jsonData,
     success: function (data) {
       generateTree(data);

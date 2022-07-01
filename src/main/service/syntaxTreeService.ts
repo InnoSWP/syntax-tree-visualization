@@ -17,19 +17,50 @@ class SyntaxTreeService {
         ")",
         "{",
         "}",
+        "[",
+        "]",
+        "\'",
+        "\"",
+        ",",
+        "`",
         "function",
         "return",
         "statement_block",
         "return_statement",
         "formal_parameters",
-        "arguments"
+        "arguments",
+        "parenthesized_expression",
+        "import",
+        "import_clause",
+        "import_specifier",
+        "as",
+        
     ];
+    #metaTypes = {
+        unary_expression:(arr:any, ind:number) => ind===0,
+        update_expression:(arr:any, ind:number) => arr[ind].text==="++"||arr[ind].text==="--",
+        spread_element:(arr:any, ind:number) => arr[ind].text==="...",
+        binary_expression:(arr:any, ind:number) => ind===1,
+        sequence_expression:(arr:any, ind:number) => arr[ind].text===",",
+        member_expression: (arr:any, ind:number) => arr[ind].text==="." || arr[ind].text==="?.",
+        augmented_assignment_expression:(arr:any, ind:number) => ind===1,
+        pair:(arr:any, ind:number) => arr[ind].text===":",
+        assignment_expression:(arr:any, ind:number) => arr[ind].text==="=",
+        //array:(arr:any, ind:number) => arr[ind].text!=="[" && arr[ind].text!=="]",
+        arrow_function:(arr:any, ind:number) => arr[ind].text==="=>",
+        ternary_expression:(arr:any, ind:number) => arr[ind].text==="?",
+
+        template_substitution:(arr:any, ind:number) => arr[ind].text==="${",
+        
+        
+    }
 
     addBadType(type:string) {
         this.#badTypes.push(type);
     }
 
-
+    
+    
     getTreeFrom(code: string) {
         if (code == this.#code)
             return this.#tree
@@ -44,6 +75,7 @@ class SyntaxTreeService {
         return this.#array
     }
 
+    
     #generate(code: string) {
         let tree = parser.parse(code);
         let node = tree.rootNode
@@ -63,6 +95,7 @@ class SyntaxTreeService {
         this.#dfsTree(node, arr, tree);
         this.#fillZeroes(arr);
         this.#tailElimination(arr);
+        console.log(JSON.stringify(tree));
 
         return {tree, arr};
     }
@@ -78,8 +111,6 @@ class SyntaxTreeService {
         let len = arr.length-1;
         for(let i = len; i > 0; --i){
             for(let j = arr[i].cur_arr.length-1; j > 0; --j){
-                if(arr[i-1].cur_arr[j] == 0)
-                    return;
                 if(arr[i].cur_arr[j] == arr[i-1].cur_arr[j])
                     arr[i].cur_arr[j] = 0;
                 else
@@ -87,47 +118,63 @@ class SyntaxTreeService {
             }
         }
     }
-    #addArray(node: Parser.SyntaxNode, arr: any, depth:number) {
+    #addArrayRow(node: Parser.SyntaxNode, arr: any, depth:number) {
         let i = 0, prevCount = (this.#ind > 0)? arr[this.#ind - 1].cur_arr.length: 0;
-        arr.push({cur_arr:[], text:node.text, type:node.type});
+        arr.push({cur_arr:[], text:node.text,
+            type:node.type, position:{start: node.startPosition, end: node.endPosition}});
 
         while (i < Math.max(depth + 1, prevCount)) {
             if (i < prevCount)
                 arr[this.#ind].cur_arr.push(arr[this.#ind - 1].cur_arr[i]);
             else
                 arr[this.#ind].cur_arr[i] = 0;
-            if (depth == i) {
+            if (depth == i){
                 arr[this.#ind].cur_arr[i]++;
             }
             ++i;
         }
-
+    }
+    #addNodeData(node:Parser.SyntaxNode, tree:any){
+        tree.type = node.type;
+        tree.text = node.text;
+        tree.position = {start: node.startPosition, end: node.endPosition};
+        tree.children = [];
+        tree.meta = []
+    }
+    #addMeta(tree:any, node:Parser.SyntaxNode, ind:number):boolean {
+        let type:string = node.type;
+        // @ts-ignore
+        if(this.#metaTypes.hasOwnProperty(type) && this.#metaTypes[`${type}`](node.children, ind)){
+            // @ts-ignore
+            tree.meta.push(node.child(ind).text);
+            return true;
+        }
+        return false;
     }
     #dfsTree(node: Parser.SyntaxNode, arr: any, tree: any, depth:number = 0, childCount = 0) {
         if (node == null || node.isMissing())
             return;
-
+        
         if(!this.#badTypes.includes(node.type)){
-            tree.type = node.type;
-            tree.text = node.text;
-            tree.position = {start: node.startPosition, end: node.endPosition};
-            tree.children = [];
+            this.#addNodeData(node, tree);
+            this.#addArrayRow(node, arr, depth);
         }
 
-        if(!this.#badTypes.includes(node.type))
-            this.#addArray(node, arr, depth);
-
         for (let i = 0; i < node.childCount; ++i) {
-
+            
+            let meta:boolean = this.#addMeta(tree, node, i);
             // @ts-ignore
             if(!this.#badTypes.includes(node.child(i).type)){
-                ++this.#ind;
-                tree.children.push({});
-                // @ts-ignore
-                this.#dfsTree(node.child(i), arr, tree.children[childCount++], depth + 1);
+                
+
+                if(!meta){
+                    ++this.#ind;
+                    tree.children.push({});
+                    // @ts-ignore
+                    this.#dfsTree(node.child(i), arr, tree.children[childCount++], depth + 1);
+                }
             }
             else{
-                // tree.children.push({});
                 // @ts-ignore
                 this.#dfsTree(node.child(i), arr, tree, depth, childCount);
                 childCount = tree.children.length;
