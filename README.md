@@ -33,7 +33,7 @@ AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 
 ## Demo
 
-TBD
+![Demo](./images/demo.gif)
 
 ## How to use
 
@@ -75,6 +75,8 @@ On Arch Linux:
 ```shell
 pacman -Suy nodejs npm git
 npm install yarn
+```
+
 ```
 git submodule init
 git submodule update
@@ -132,3 +134,7 @@ to discuss what you would like to change.
 - [TypeScript](https://www.typescriptlang.org/)
 - [Ace Editor](https://ace.c9.io/)
 
+## Links
+
+[^1]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
+[^2]: https://dl.acm.org/doi/10.1145/2935323.2935331
