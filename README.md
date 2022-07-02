@@ -134,3 +134,7 @@ to discuss what you would like to change.
 - [TypeScript](https://www.typescriptlang.org/)
 - [Ace Editor](https://ace.c9.io/)
 
+## Links
+
+[^1]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
+[^2]: https://dl.acm.org/doi/10.1145/2935323.2935331
