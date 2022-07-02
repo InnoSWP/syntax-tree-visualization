@@ -1,0 +1,22 @@
+FROM archlinux
+
+WORKDIR /app
+
+# COPY . .
+
+EXPOSE 8080
+
+# VOLUME ["/app"]
+
+COPY src src
+RUN rm -rf src/resources/static/ace-builds/demo
+COPY tsconfig.json tsconfig.json
+COPY yarn.lock yarn.lock
+COPY package.json package.json
+
+RUN pacman -Suy --noconfirm arm-none-eabi-newlib nodejs-lts-gallium npm make gcc
+RUN npm install --global yarn
+RUN yarn add typescript
+
+CMD yarn start
+
