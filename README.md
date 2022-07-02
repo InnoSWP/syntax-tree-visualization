@@ -37,7 +37,8 @@ TBD
 
 ## How to use
 
-Refer to documentation on the website
+Simply type code in code editor and see how AST and SA change.
+For more information refer to documentation on the website.
 
 ## Installation
 
