@@ -1,8 +1,4 @@
-<h1>
-	<p align="center">
-	Syntax Tree Visualizer
-	</p>
-</h1>
+# Syntax tree visualizer
 
 Syntax tree visualizer provides interactive environment for exploration of
 AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
@@ -31,17 +27,31 @@ TBD
 
 ## Development
 
-Following these instructions you will get you a copy of the project up
-and running on your local machine for development and testing purposes.
+### Local setup
 
-**Clone the repo**
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes.
 
 ```sh
 git clone https://github.com/InnoSWP/syntax-tree-visualization
 ```
 
-**Initiate and download all submodules**
+For running the project you need the following requirements:
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Git](https://git-scm.com/downloads)
 
+On macOS using Homebrew:
+
+```shell
+brew install git node
+npm install yarn
+```
+On Arch Linux:
+
+```shell
+pacman -Suy nodejs npm git
+npm install yarn
 ```
 git submodule init
 git submodule update
@@ -72,6 +82,11 @@ Requirements:
 **Install dependencies**
 ```shell
 yarn
+ ```
+**Build project**
+
+```shell
+yarn build
 ```
 **Start server without building it** on http://localhost:8080/
 ```shell
@@ -94,7 +109,3 @@ to discuss what you would like to change.
 - [TypeScript](https://www.typescriptlang.org/)
 - [Ace Editor](https://ace.c9.io/)
 
-## Links
-
-[^1]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
-[^2]: https://dl.acm.org/doi/10.1145/2935323.2935331
