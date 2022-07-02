@@ -76,6 +76,8 @@ On Arch Linux:
 pacman -Suy nodejs npm git
 npm install yarn
 ```
+
+```
 git submodule init
 git submodule update
 ```
