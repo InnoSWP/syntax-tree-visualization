@@ -92,7 +92,7 @@ export function generateTree(data) {
       .classed("info", true)
       .attr("x", -20)
       .attr("y", 35)
-      .text((d) => d.data.text);
+      .text((d) => d.data.text+" meta:"+d.data.meta);
   });
 
   node.on('mouseout', function () {
