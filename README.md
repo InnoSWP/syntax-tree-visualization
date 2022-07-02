@@ -33,7 +33,7 @@ AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 
 ## Demo
 
-TBD
+![Demo](./images/demo.gif)
 
 ## How to use
 
