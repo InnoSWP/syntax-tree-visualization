@@ -1,10 +1,16 @@
+[![ts](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)](https://www.typescriptlang.org/)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_syntax-tree-visualization&metric=bugs)](https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=InnoSWP_syntax-tree-visualization)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_syntax-tree-visualization&metric=vulnerabilities)](https://sonarcloud.io/project/issues?resolved=false&types=VULNERABILITY&id=InnoSWP_syntax-tree-visualization)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_syntax-tree-visualization&metric=code_smells)](https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=InnoSWP_syntax-tree-visualization)
+[![Lint Code Base](https://github.com/InnoSWP/syntax-tree-visualization/actions/workflows/liner.yml/badge.svg)](https://github.com/InnoSWP/syntax-tree-visualization/actions/workflows/liner.yml)
+
 <h1>
 	<p align="center">
-	Syntax Tree Visualizer
+	🌳 Syntax Tree Visualizer 
 	</p>
 </h1>
 
-Syntax tree visualizer provides interactive environment for exploration of
+Syntax Tree Visualizer provides **interactive environment** for exploration of
 AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 
 ## Features
@@ -29,7 +35,19 @@ AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 
 TBD
 
-## Development
+## How to use
+
+Refer to documentation on the website
+
+## Installation
+
+### All in one Docker container
+
+```sh
+docker run -p 8080:8080 -d --rm --name devast skril/stv:1.0-full
+```
+
+### Development
 
 Following these instructions you will get you a copy of the project up
 and running on your local machine for development and testing purposes.
@@ -47,7 +65,7 @@ git submodule init
 git submodule update
 ```
 
-### Using docker
+#### Using docker
 
 ```sh
 docker run -p 8080:8080 -d --rm --name devast --mount src=/path/to/syntax-tree-visualization,dst=/app,type=bind skril/devast:archlinux
@@ -61,13 +79,16 @@ Alternatively on UNIX operating systems:
 docker run -p 8080:8080 -d --rm --name devast --mount src=$(pwd),dst=/app,type=bind skril/devast:archlinux
 ```
 
-### Local setup
+#### Local setup
 
 Requirements:
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/getting-started/install)
 - [Git](https://git-scm.com/downloads)
+- [arm-none-eabi-newlib](https://archlinux.org/packages/community/any/arm-none-eabi-newlib/)
+- [GNU Make](https://www.gnu.org/software/make/)
+- [GCC](https://gcc.gnu.org/)
 
 **Install dependencies**
 ```shell
@@ -77,9 +98,6 @@ yarn
 ```shell
 yarn start
 ```
-## Self-hosting
-
-Currently, only development version is available
 
 ## Contribution
 
