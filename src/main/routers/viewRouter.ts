@@ -3,11 +3,11 @@ import {Router} from "express";
 
 const viewRouter = Router()
 
-viewRouter.get('/', (req, res) => {
+viewRouter.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'resources', 'templates', 'index.html'))
 })
 
-viewRouter.get('/edit', (req, res) => {
+viewRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'resources', 'templates', 'texteditor.html'))
 })
 
