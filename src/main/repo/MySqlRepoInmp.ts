@@ -1,3 +1,5 @@
+import {config} from "../../resources/config/config"
+
 const mysql = require("mysql2");
 
 import {hashCode} from "../utils/usefullFunctions";
@@ -9,10 +11,10 @@ class MySQLRepo implements CodeRepo {
     }
 
     private connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        database: "swpbase",
-        password: "12345"
+        host: config.mysql.host,
+        user: config.mysql.user,
+        database: config.mysql.database,
+        password: config.mysql.password
     });
 
 
