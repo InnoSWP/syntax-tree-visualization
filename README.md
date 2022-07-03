@@ -38,7 +38,7 @@ AST[^1] (abstract syntax tree) and SA[^2] (syntax array).
 ## How to use
 
 Simply type code in code editor and see how AST and SA change.
-For more information refer to documentation on the website.
+For more information refer to documentation on the [website](http://5.53.124.6/).
 
 ## Installation
 
