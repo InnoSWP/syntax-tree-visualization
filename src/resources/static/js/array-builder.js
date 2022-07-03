@@ -13,6 +13,7 @@ editor.session.on('change', function (/** @type {any} */ _delta) {
     type: 'POST',
     data: jsonData,
     success: function (data) {
+      // @ts-ignore
       document.getElementById('array').innerText = '';
       building(data);
     }

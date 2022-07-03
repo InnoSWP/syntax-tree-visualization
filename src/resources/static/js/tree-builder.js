@@ -1,5 +1,5 @@
 // import * as d3 from "d3";
-
+import {selectText} from "./editor.js";
 /**
  * @param {any} data
  */
@@ -9,6 +9,7 @@ export function generateTree(data) {
   // @ts-ignore
   d3.selectAll('svg').remove();
 
+  console.log(data);
   // Assigns parent
   // @ts-ignore
   var nodes = d3.hierarchy(data);
@@ -75,20 +76,23 @@ export function generateTree(data) {
 
   node.append("text")
     .attr("dy", 3)
-    .style('font-size', "16px")
+    .style('font-size', "14px")
     .attr("x", 15)           // set x position of left side of text
     .attr("y", 0)
+    .attr('font-family', "Roboto")
     .attr("align-content", 'center')
     .attr("text-anchor", "middle")
     .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
-  node.on('mouseover', function (_data) {
+  node.on('mouseover', function () {
     // @ts-ignore
     var g = d3.select(this); // The node
     // The class is used to remove the additional text later
     var info = g
       .append("text")
+      .attr('font-family', 'Roboto')
+      .attr('color', 'grey' )
       .classed("info", true)
       .attr("x", -20)
       .attr("y", 35)
@@ -103,11 +107,11 @@ export function generateTree(data) {
 
   });
 
-  node.on('mouseout', function () {
-    // @ts-ignore
-    d3.select(this)
-      .select("text.info")
-      .remove();
-
+  node.on('click', function () {
+    //@ts-ignore
+   d3.select(this).each(function (e) {
+     selectText(e.data.position);
+    });
   });
+
 }
