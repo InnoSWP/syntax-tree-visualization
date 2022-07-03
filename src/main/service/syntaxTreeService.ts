@@ -23,141 +23,154 @@ class SyntaxTreeService {
         ",",
         "`",
         "as",
+        "new",
         "await",
+        "class",
         "return",
         "import",
+        "class_body",
         "import_clause",
         "import_specifier",
 
         "variable_declarator",
         "function",
         "statement_block",
-        //"return_statement",
+        "return_statement",
         "formal_parameters",
         "arguments",
         "parenthesized_expression",
+        "expression_statement",
     ];
     #metaTypes = {
         unary_expression:[
             (arr:any, ind:number) => ind===0,
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Unary operator: ${node.child(ind).text}`);
+                tree.meta.push(`Unary operator: ${node.child(ind)!.text}`);
             }
         ],
         update_expression:[
             (arr:any, ind:number) => arr[ind].text==="++"||arr[ind].text==="--",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Update operator: ${node.child(ind).text}`);
+                tree.meta.push(`Update operator: ${node.child(ind)!.text}`);
             }
         ],
         spread_element:[
             (arr:any, ind:number) => arr[ind].text==="...",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Spread operator: ${node.child(ind).text}`);
+                tree.meta.push(`Spread operator: ${node.child(ind)!.text}`);
             }
         ],
         binary_expression:[
             (arr:any, ind:number) => ind===1,
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Binary operator: ${node.child(ind).text}`);
+                tree.meta.push(`Binary operator: ${node.child(ind)!.text}`);
             }
         ],
         sequence_expression:[
             (arr:any, ind:number) => arr[ind].text===",",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Sequence operator: ${node.child(ind).text}`);
+                tree.meta.push(`Sequence operator: ${node.child(ind)!.text}`);
             }
         ],
         member_expression:[
             (arr:any, ind:number) => arr[ind].text==="." || arr[ind].text==="?.",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Member operator: ${node.child(ind).text}`);
+                tree.meta.push(`Member operator: ${node.child(ind)!.text}`);
             }
         ],
         augmented_assignment_expression:[
             (arr:any, ind:number) => ind===1,
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Augmented assignment operator: ${node.child(ind).text}`);
+                tree.meta.push(`Augmented assignment operator: ${node.child(ind)!.text}`);
             }
         ],
         pair:[
             (arr:any, ind:number) => arr[ind].text===":",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Pair operator: ${node.child(ind).text}`);
+                tree.meta.push(`Pair operator: ${node.child(ind)!.text}`);
             }
         ],
         assignment_expression:[
             (arr:any, ind:number) => arr[ind].text==="=",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Assignment operator: ${node.child(ind).text}`);
+                tree.meta.push(`Assignment operator: ${node.child(ind)!.text}`);
             }
         ],
         //array:(arr:any, ind:number) => arr[ind].text!=="[" && arr[ind].text!=="]",
         arrow_function:[
             (arr:any, ind:number) => arr[ind].text==="=>",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Arrow function operator: ${node.child(ind).text}`);
+                tree.meta.push(`Arrow function operator: ${node.child(ind)!.text}`);
             }
         ],
         ternary_expression:[
             (arr:any, ind:number) => arr[ind].text==="?",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Ternary operator: ${node.child(ind).text}`);
+                tree.meta.push(`Ternary operator: ${node.child(ind)!.text}`);
             }
         ],
         template_substitution:[
             (arr:any, ind:number) => arr[ind].text==="${",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Template operator: ${node.child(ind).text}`);
+                tree.meta.push(`Template operator: ${node.child(ind)!.text}`);
             }
         ],
 
         variable_declarator:[
-            (arr:any, ind:number) => arr[ind].text==="=",
+            (arr:any, ind:number) => arr[ind].text==="=" || arr[ind].type==="identifier",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Variable declarator operator: ${node.child(ind).text}`);
+                if(node.child(ind)!.type === "identifier")
+                    tree.meta.push(`Name: ${node.child(ind)!.text}`);
+                else
+                    tree.meta.push(`Variable declarator operator: ${node.child(ind)!.text}`);
             }
         ],
         function_declaration:[
             (arr:any, ind:number) => arr[ind].type==="identifier",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
                 if(tree.meta.length == 0){
-                    //@ts-ignore
-                    tree.meta.push(`Name: ${node.child(ind).text}`);
+                        tree.meta.push(`Name: ${node.child(ind)!.text}`);
                 } else{
-                    //@ts-ignore        
-                    tree.meta.push(`Arg: ${node.child(ind).text}`);
+                    tree.meta.push(`Arg: ${node.child(ind)!.text}`);
                 }
             }
         ],
         formal_parameters:[
             (arr:any, ind:number) => arr[ind].type==="identifier",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Par: ${node.child(ind).text}`);
+                tree.meta.push(`Par: ${node.child(ind)!.text}`);
             }
         ],
         call_expression:[
             (arr:any, ind:number) => arr[ind].type==="identifier",
             (tree:any, node:Parser.SyntaxNode, ind:number) => {
-                //@ts-ignore
-                tree.meta.push(`Called: ${node.child(ind).text}`);
+                tree.meta.push(`Called: ${node.child(ind)!.text}`);
             }
         ],
-        
+        class_declaration:[
+            (arr:any, ind:number) => arr[ind].type==="identifier",
+            (tree:any, node:Parser.SyntaxNode, ind:number) => {
+                tree.meta.push(`Name: ${node.child(ind)!.text}`);
+            }
+        ],
+        method_definition:[
+            (arr:any, ind:number) => arr[ind].type==="property_identifier",
+            (tree:any, node:Parser.SyntaxNode, ind:number) => {
+                tree.meta.push(`Name: ${node.child(ind)!.text}`);
+            }
+        ],
+        lexical_declaration:[
+            (arr:any, ind:number) => arr[ind].type==="let" || arr[ind].type==="identifier",
+            (tree:any, node:Parser.SyntaxNode, ind:number) => {
+                tree.meta.push(`Keyword: ${node.child(ind)!.text}`);
+            }
+        ],
+        new_expression:[
+            (arr:any, ind:number) => arr[ind].type==="identifier",
+            (tree:any, node:Parser.SyntaxNode, ind:number) => {
+                tree.meta.push(`Name: ${node.child(ind)!.text}`);
+            }
+        ]
     }
 
     addBadType(type:string) {
@@ -268,18 +281,15 @@ class SyntaxTreeService {
         for (let i = 0; i < node.childCount; ++i) {
             
             let meta:boolean = this.#addMeta(tree, node, i);
-            // @ts-ignore
-            if(!this.#badTypes.includes(node.child(i).type)){
+            if(!this.#badTypes.includes(node.child(i)!.type)){
                 if(!meta){
                     ++this.#ind;
                     tree.children.push({});
-                    // @ts-ignore
-                    this.#dfsTree(node.child(i), arr, tree.children[childCount++], depth + 1);
+                    this.#dfsTree(node.child(i)!, arr, tree.children[childCount++], depth + 1);
                 }
             }
             else{
-                // @ts-ignore
-                this.#dfsTree(node.child(i), arr, tree, depth, childCount);
+                this.#dfsTree(node.child(i)!, arr, tree, depth, childCount);
                 childCount = tree.children.length;
             }
         }
