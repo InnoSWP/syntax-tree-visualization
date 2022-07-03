@@ -8,7 +8,6 @@ editor.session.on('change', function (/** @type {any} */ _delta) {
   console.log(getvalue());
   let jsonData = { code: editor.getValue() };
 
-
   $.ajax({
     url: '/array',
     type: 'POST',
