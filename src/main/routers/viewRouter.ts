@@ -11,7 +11,6 @@ viewRouter.get('/index', (req, res) => {
 })
 
 viewRouter.get('/', (req, res) => {
-    let file
     let map = new Map<String, Object>()
     if (req.query['hash'] != undefined) {
         map.set('default_text', saveService.get(req.query['hash'].toString()))
