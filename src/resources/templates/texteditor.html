@@ -81,17 +81,14 @@
     <div class="b-popup-content">
         <button class="close" id="shareclose">&times;</button>
         <h1>Share</h1>
-        <h2>URL</h2>
-        <p>Copy this URL to share the page</p>
-        <p><a href="https://github.com/InnoSWP/syntax-tree-visualization">Github repository</a></p>
-        <h2>Export to</h2>
-        <div class="container-buttons">
-            <button id="format1">format 1</button>
-            <button id="format2">format 2</button>
-            <button id="format3">format 3</button>
-        </div>
+        <p>Now you can copy url and share with others</p>
+        <p><input name="textfield" type="text" value="" id="URL-share"></p>
     </div>
 </div>
+
+<script>
+    document.getElementById('URL-share').value = window.location.href;
+</script>
 
 <div id="default_text" hidden="hidden">[[${default_text}]]</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

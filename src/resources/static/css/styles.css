@@ -17,7 +17,8 @@ header {
 h1,
 h2,
 p,
-ul
+ul,
+#URL-share
 {
   text-align: center;
   font-family: Roboto, Assistant, sans-serif;
@@ -163,6 +164,10 @@ td {
   margin: 10% auto;
   padding: 20px;
   width: 40%;
+}
+
+#URL-share {
+  font-size: 16px;
 }
 
 .close {
