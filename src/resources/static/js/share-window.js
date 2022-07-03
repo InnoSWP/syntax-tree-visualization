@@ -1,22 +1,15 @@
 var shareWindow = document.getElementById("share");
 var button = document.getElementById("share-button");
 let spanShare = document.getElementById("shareclose");
-import {editor} from "../js/editor.js"
 
+// @ts-ignore
 button.onclick = function () {
-    shareWindow.style.display = "block";
-    $.ajax({
-        url: '/save',
-        type: 'POST',
-        data: {code: editor.getValue('')},
-        success: function (data) {
-            console.log(data);
-            window.history.pushState({}, null, "/?hash=" + data)
-            // Прикрутите пж чтобы url показывался на share страничке, не только в строке наверху
-        }
-    })
+  // @ts-ignore
+  shareWindow.style.display = "block";
 }
 
+// @ts-ignore
 spanShare.onclick = function () {
-    shareWindow.style.display = "none";
+  // @ts-ignore
+  shareWindow.style.display = "none";
 }
