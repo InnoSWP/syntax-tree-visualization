@@ -213,7 +213,8 @@ class SyntaxTreeService {
         this.#dfsTree(node, arr, tree);
         this.#fillZeroes(arr);
         this.#tailElimination(arr);
-        console.log(JSON.stringify(tree));
+        // console.log(JSON.stringify(tree));
+        //console.log(JSON.stringify(arr));
 
         return {tree, arr};
     }
@@ -239,7 +240,7 @@ class SyntaxTreeService {
     #addArrayRow(node: Parser.SyntaxNode, arr: any, depth:number) {
         let i = 0, prevCount = (this.#ind > 0)? arr[this.#ind - 1].cur_arr.length: 0;
         arr.push({cur_arr:[], text:node.text,
-            type:node.type, position:{start: node.startPosition, end: node.endPosition}});
+            type:node.type, position:{start: node.startPosition, end: node.endPosition}, meta:[]});
 
         while (i < Math.max(depth + 1, prevCount)) {
             if (i < prevCount)
@@ -259,12 +260,13 @@ class SyntaxTreeService {
         tree.children = [];
         tree.meta = []
     }
-    #addMeta(tree:any, node:Parser.SyntaxNode, ind:number):boolean {
+    #addMeta(tree:any, arr:any, node:Parser.SyntaxNode, ind:number):boolean {
         let type:string = node.type;
         // @ts-ignore
         if(this.#metaTypes.hasOwnProperty(type) && this.#metaTypes[`${type}`][0](node.children, ind)){
             // @ts-ignore
             this.#metaTypes[`${type}`][1](tree, node, ind);
+            arr[arr.length-1].meta = tree.meta;
             return true;
         }
         return false;
@@ -280,7 +282,7 @@ class SyntaxTreeService {
 
         for (let i = 0; i < node.childCount; ++i) {
             
-            let meta:boolean = this.#addMeta(tree, node, i);
+            let meta:boolean = this.#addMeta(tree, arr, node, i);
             if(!this.#badTypes.includes(node.child(i)!.type)){
                 if(!meta){
                     ++this.#ind;
@@ -295,13 +297,5 @@ class SyntaxTreeService {
         }
     }
 }
-/*
-function sum(n){
-	function sum2(x){
-		return (x + n);
-	}
-	return sum2(sum(n-1));
-}
-*/
 
 export const syntaxTreeService = new SyntaxTreeService()
