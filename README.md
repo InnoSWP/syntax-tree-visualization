@@ -120,6 +120,11 @@ yarn build
 ```shell
 yarn start
 ```
+Env vars: MYSQL_HOST=localhost;MYSQL_USER=root;MYSQL_DATABASE=swpbase;MYSQL_PASSWORD=12345</br>
+To start with them
+```shell
+export MYSQL_HOST=localhost export MYSQL_USER=root export MYSQL_DATABASE=swpbase export MYSQL_PASSWORD=12345; yarn start
+```
 
 ## Contribution
 
