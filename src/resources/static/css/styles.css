@@ -16,16 +16,27 @@ header {
 
 h1,
 h2,
-p {
+p,
+ul
+{
   text-align: center;
   font-family: Roboto, Assistant, sans-serif;
   font-style: normal;
   margin-bottom: 3%;
 }
+.elements-help {
+  text-align: center;
+}
+
+.elements-help > ul {
+  list-style-type: none;
+
+}
 
 a:link {
   color: black;
 }
+
 
 .logo {
   margin-left: 41px;
@@ -149,7 +160,7 @@ td {
   background-color: #fefefe;
   border: 1px solid black;
   border-radius: 10px;
-  margin: 20% auto;
+  margin: 10% auto;
   padding: 20px;
   width: 40%;
 }
