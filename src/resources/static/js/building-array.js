@@ -1,3 +1,4 @@
+import {selectText} from "./editor.js";
 export function building (data) {
   const table = document.createElement('table');
   /**
@@ -42,25 +43,21 @@ export function building (data) {
 
   for (const key in data) {
     // @ts-ignore
-    console.log(data);
     row = table.insertRow();
     let cellA = new cA(row.insertCell(), null);
     let cellB = new cB(row.insertCell(), null);
+    // @ts-ignore
+    positionMatrix[key] = data[key].position;
     for (const i in data[key].cur_arr) {
       // @ts-ignore
-      //positionMatrix[key][i] = data[key].cur_arr[i].position;
-      // @ts-ignore
-      //console.log(positionMatrix[key][i]);
       let cellC = new cC(row.insertCell(), null);
       cellC.cellC.innerHTML = data[key].cur_arr[i];
       cellC.cellC.style.textAlign = 'center';
       cellC.position = data[key].cur_arr[i].position; //?
-      //console.log(cellC.position);
     }
 
     cellA.cellA.innerHTML = data[key].text;
     cellA.position = data[key].position;
-   // console.log(cellA.position);
     cellB.cellB.style.backgroundColor = '#438440';
     cellB.cellB.style.color = 'white';
     cellB.cellB.innerHTML = data[key].type;
@@ -71,12 +68,9 @@ export function building (data) {
   document.querySelector('table').onclick = (event) => {
     let cell = event.target;
     // @ts-ignore
-   // console.log(cell.cellA.position);
     let i = cell.parentNode.rowIndex;
     // @ts-ignore
-    let j = cell.cellIndex;
-
-    console.log(i,j);
+    selectText(positionMatrix[i]);
   }
 }
 

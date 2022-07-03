@@ -14,7 +14,6 @@ generateTree(document.getElementById("default_text").innerText) // штука р
 // @ts-ignore
 building(document.getElementById("default_text").innerText) // штука работает не совсем корректно
 editor.session.on('change', function (/** @type {any} */ _delta) {
-    console.log(getvalue());
     let jsonData = {code: editor.getValue()};
     $.ajax({
         url: '/tree',
