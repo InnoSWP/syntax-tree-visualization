@@ -1,5 +1,5 @@
 // import * as d3 from "d3";
-
+import {selectText} from "./editor.js";
 /**
  * @param {any} data
  */
@@ -8,7 +8,6 @@ export function generateTree(data) {
   const f = document.getElementById("tree-cont");
   // @ts-ignore
   d3.selectAll('svg').remove();
-
   // Assigns parent
   // @ts-ignore
   var nodes = d3.hierarchy(data);
@@ -36,11 +35,8 @@ export function generateTree(data) {
   // @ts-ignore
   var tree = d3.tree()
     .size([w, h]);
-
   // Assigns the x and y position for the nodes
   nodes = tree(nodes);
-  console.log(nodes);
-
 
   // adds the links between the nodes
   g.selectAll(".link")
@@ -70,29 +66,31 @@ export function generateTree(data) {
 
 
   node.append('circle')
-    .attr('r', 9)
-    .attr('fill', 'grey');
+    .attr('r', 10)
+    .attr('fill', '#438440');
 
   node.append("text")
-    .attr("dy", 3)
-    .style('font-size', "16px")
+    .attr("dy", 5)
+    .style('font-size', "20px")
     .attr("x", 15)           // set x position of left side of text
     .attr("y", 0)
-    .attr("align-content", 'center')
-    .attr("text-anchor", "middle")
-    .style("text-anchor", (d) => d.children ? "end" : "start")
+    .attr('font-family', "Roboto")
+    .attr("align-content", 'left')
     .text((d) => d.data.type);
 
-  node.on('mouseover', function (_data) {
+  node.on('mouseover', function () {
     // @ts-ignore
     var g = d3.select(this); // The node
     // The class is used to remove the additional text later
     var info = g
       .append("text")
+      .attr('font-family', 'Roboto')
+			.style('font-size', "20px")
+      .attr('color', 'grey' )
       .classed("info", true)
       .attr("x", -20)
       .attr("y", 35)
-      .text((d) => d.data.text+" meta:"+d.data.meta);
+      .text((d) => d.data.meta.join(", "));
   });
 
   node.on('mouseout', function () {
@@ -103,11 +101,11 @@ export function generateTree(data) {
 
   });
 
-  node.on('mouseout', function () {
-    // @ts-ignore
-    d3.select(this)
-      .select("text.info")
-      .remove();
-
+  node.on('click', function () {
+    //@ts-ignore
+   d3.select(this).each(function (e) {
+     selectText(e.data.position);
+    });
   });
+
 }
