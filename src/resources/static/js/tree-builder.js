@@ -66,8 +66,8 @@ export function generateTree(data) {
 
 
   node.append('circle')
-    .attr('r', 15)
-    .attr('fill', '#5DB958');
+    .attr('r', 10)
+    .attr('fill', '#438440');
 
   node.append("text")
     .attr("dy", 5)
@@ -85,6 +85,7 @@ export function generateTree(data) {
     var info = g
       .append("text")
       .attr('font-family', 'Roboto')
+			.style('font-size', "20px")
       .attr('color', 'grey' )
       .classed("info", true)
       .attr("x", -20)
