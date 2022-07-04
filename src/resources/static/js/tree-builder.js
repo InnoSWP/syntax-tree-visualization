@@ -70,13 +70,13 @@ export function generateTree(data) {
     .attr('fill', 'grey');
 
   node.append("text")
-    .attr("dy", 3)
-    .style('font-size', "14px")
-    .attr("x", 15)           // set x position of left side of text
+    .attr("dy", 5)
+    .style('font-size', "17px")
+    .attr("x", -10)           // set x position of left side of text
     .attr("y", 0)
     .attr('font-family', "Roboto")
-    .attr("align-content", 'center')
-    .attr("text-anchor", "middle")
+    .attr("align-content", 'left')
+    .attr("text-anchor", "left")
     .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
@@ -91,7 +91,7 @@ export function generateTree(data) {
       .classed("info", true)
       .attr("x", -20)
       .attr("y", 35)
-      .text((d) => d.data.meta);
+      .text((d) => d.data.meta.join(", "));
   });
 
   node.on('mouseout', function () {

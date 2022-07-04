@@ -56,7 +56,7 @@ export function building (data) {
       cellC.position = data[key].cur_arr[i].position; //?
     }
 
-    cellA.cellA.innerHTML = data[key].text;
+    cellA.cellA.innerHTML = data[key].meta.join(", ");
     cellA.position = data[key].position;
     cellB.cellB.style.backgroundColor = '#438440';
     cellB.cellB.style.color = 'white';
