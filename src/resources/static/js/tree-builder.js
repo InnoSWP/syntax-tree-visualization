@@ -72,12 +72,10 @@ export function generateTree(data) {
   node.append("text")
     .attr("dy", 5)
     .style('font-size', "20px")
-    .attr("x", 0)           // set x position of left side of text
+    .attr("x", 15)           // set x position of left side of text
     .attr("y", 0)
     .attr('font-family', "Roboto")
     .attr("align-content", 'left')
-    .attr("text-anchor", "start")
-    .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
   node.on('mouseover', function () {
