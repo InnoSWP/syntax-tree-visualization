@@ -66,18 +66,16 @@ export function generateTree(data) {
 
 
   node.append('circle')
-    .attr('r', 15)
-    .attr('fill', '#5DB958');
+    .attr('r', 10)
+    .attr('fill', '#438440');
 
   node.append("text")
     .attr("dy", 5)
     .style('font-size', "20px")
-    .attr("x", 0)           // set x position of left side of text
+    .attr("x", 15)           // set x position of left side of text
     .attr("y", 0)
     .attr('font-family', "Roboto")
     .attr("align-content", 'left')
-    .attr("text-anchor", "start")
-    .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
   node.on('mouseover', function () {
@@ -87,6 +85,7 @@ export function generateTree(data) {
     var info = g
       .append("text")
       .attr('font-family', 'Roboto')
+			.style('font-size', "20px")
       .attr('color', 'grey' )
       .classed("info", true)
       .attr("x", -20)
