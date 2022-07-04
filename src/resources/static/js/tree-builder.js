@@ -66,17 +66,17 @@ export function generateTree(data) {
 
 
   node.append('circle')
-    .attr('r', 9)
-    .attr('fill', 'grey');
+    .attr('r', 15)
+    .attr('fill', '#5DB958');
 
   node.append("text")
     .attr("dy", 5)
-    .style('font-size', "17px")
-    .attr("x", -10)           // set x position of left side of text
+    .style('font-size', "20px")
+    .attr("x", 0)           // set x position of left side of text
     .attr("y", 0)
     .attr('font-family', "Roboto")
     .attr("align-content", 'left')
-    .attr("text-anchor", "left")
+    .attr("text-anchor", "start")
     .style("text-anchor", (d) => d.children ? "end" : "start")
     .text((d) => d.data.type);
 
