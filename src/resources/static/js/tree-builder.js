@@ -76,7 +76,7 @@ export function generateTree(data) {
     .attr("y", 0)
     .attr('font-family', "Roboto")
     .attr("align-content", 'left')
-    .text((d) => d.data.type);
+    .text((d) => d.data.type.charAt(0).toUpperCase() + d.data.type.slice(1).replaceAll("_", " "));
 
   node.on('mouseover', function () {
     // @ts-ignore

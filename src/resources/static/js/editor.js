@@ -10,9 +10,9 @@ editor.session.setMode("ace/mode/javascript");
 // @ts-ignore
 editor.setValue(document.getElementById("default_text").innerText)
 // @ts-ignore
-generateTree(document.getElementById("default_text").innerText) // штука работает не совсем корректно
+// generateTree(document.getElementById("default_text").innerText) // штука работает не совсем корректно
 // @ts-ignore
-building(document.getElementById("default_text").innerText) // штука работает не совсем корректно
+// building(document.getElementById("default_text").innerText) // штука работает не совсем корректно
 editor.session.on('change', function (/** @type {any} */ _delta) {
     let jsonData = {code: editor.getValue()};
     $.ajax({
