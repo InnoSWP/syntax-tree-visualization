@@ -53,13 +53,16 @@ export function building (data) {
       let cellC = new cC(row.insertCell(), null);
       cellC.cellC.innerHTML = data[key].cur_arr[i];
       cellC.cellC.style.textAlign = 'center';
+      cellC.cellC.style.fontFamily = 'Roboto';
       cellC.position = data[key].cur_arr[i].position; //?
     }
 
     cellA.cellA.innerHTML = data[key].meta.join(", ");
     cellA.position = data[key].position;
+    cellA.cellA.style.fontFamily = 'Roboto';
     cellB.cellB.style.backgroundColor = '#438440';
     cellB.cellB.style.color = 'white';
+    cellB.cellB.style.fontFamily = 'Roboto';
     cellB.cellB.innerHTML = data[key].type;
     cellB.position = data[key].position;
   }
