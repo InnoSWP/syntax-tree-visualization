@@ -8,8 +8,6 @@ export function generateTree(data) {
   const f = document.getElementById("tree-cont");
   // @ts-ignore
   d3.selectAll('svg').remove();
-
-  console.log(data);
   // Assigns parent
   // @ts-ignore
   var nodes = d3.hierarchy(data);
@@ -37,11 +35,8 @@ export function generateTree(data) {
   // @ts-ignore
   var tree = d3.tree()
     .size([w, h]);
-
   // Assigns the x and y position for the nodes
   nodes = tree(nodes);
-  console.log(nodes);
-
 
   // adds the links between the nodes
   g.selectAll(".link")
